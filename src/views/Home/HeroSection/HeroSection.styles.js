@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const HeroSectionStyles = styled.section`
     background-color: ${props => props.theme.primaryColor};
-    color: ${props => props.theme.paragraphColor};
     padding: 0 3rem;
     padding-top: 7rem;
     transition: all 0.2s;
@@ -97,6 +96,7 @@ const HeroSectionStyles = styled.section`
 
             @media only screen and (min-width: 87.5em) {
                 flex-direction: row;
+                align-items: center;
             }
         }
 

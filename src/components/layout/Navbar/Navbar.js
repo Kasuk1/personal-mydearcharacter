@@ -48,7 +48,7 @@ export const Navbar = () => {
             <li><NavLink className={({ isActive }) => "navbar__item" + (isActive ? " active" : "")} to="coins">Coins</NavLink></li>
             <li><NavLink className={({ isActive }) => "navbar__item" + (isActive ? " active" : "")} to="about">About</NavLink></li>
             <li className="navbar__item">
-                {isDarkTheme ? 'Dark' : 'Light'} <FontAwesomeIcon className="navbar__item--icon toggle" icon={isDarkTheme ? faToggleOn : faToggleOff} onClick={handleToggle} />
+                {isDarkTheme ? 'Light' : 'Dark'} <FontAwesomeIcon className="navbar__item--icon toggle" icon={isDarkTheme ? faToggleOn : faToggleOff} onClick={handleToggle} />
             </li>
             <li className="navbar__item"><NavLink className={({ isActive }) => "navbar__item" + (isActive ? "active" : "")} to="profile">
                 <img className="navbar__item--avatar" src="https://media-exp1.licdn.com/dms/image/C4E03AQH4NtwgxrZSjQ/profile-displayphoto-shrink_800_800/0/1632448218935?e=1645056000&v=beta&t=-NcjpqU0stNIyEixTZHiIhc4BVIwUhMx2W0BS-RtrUo" alt="Profile avatar"></img>
