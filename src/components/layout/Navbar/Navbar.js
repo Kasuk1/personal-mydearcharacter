@@ -1,15 +1,16 @@
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes, faToggleOn, faToggleOff } from '@fortawesome/free-solid-svg-icons';
 
 import { handleNavbarScroll, handleShowMenu, handleTheme, selectDarkTheme, selectNavbarScroll, selectShowMenu } from '../../../features/layout/layout.slice';
+import { Container } from '../Container/Container';
 
 import NavbarStyles from './Navbar.styles';
-import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
+    const navigate = useNavigate();
     const isMediumScreen = useMediaQuery({
         query: '(min-width: 87.5em)'
     });
@@ -57,20 +58,24 @@ export const Navbar = () => {
     );
 
     return (
-        <NavbarStyles style={isNavbarScroll ? scrollNavbarStyles : {}}>
-            <span className="navbar__logo">MDC</span>
-            {
-                isMediumScreen
-                    ?
-                    navbarList()
-                    :
-                    (
-                        <>
-                            {navbarList()}
-                            <FontAwesomeIcon className="navbar__item--icon bars" icon={showMenu ? faTimes : faBars} onClick={handleClickBars} />
-                        </>
-                    )
-            }
-        </NavbarStyles>
+        <header>
+            <NavbarStyles style={isNavbarScroll ? scrollNavbarStyles : {}}>
+                <Container>
+                    <span className="navbar__logo" onClick={() => navigate("/")}>MDC</span>
+                    {
+                        isMediumScreen
+                            ?
+                            navbarList()
+                            :
+                            (
+                                <>
+                                    {navbarList()}
+                                    <FontAwesomeIcon className="navbar__item--icon bars" icon={showMenu ? faTimes : faBars} onClick={handleClickBars} />
+                                </>
+                            )
+                    }
+                </Container>
+            </NavbarStyles>
+        </header>
     )
 }

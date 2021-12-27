@@ -16,7 +16,7 @@ export const PublicRoutes = () => {
             <Routes>
                 <Route path='/' element={<HomePage />}></Route>
                 <Route path="characters" element={<CharactersPage />}></Route>
-                <Route path="character/:characterId"></Route>
+                <Route path="characters/:characterId"></Route>
                 <Route path="coins" element={<CoinsPage />}></Route>
                 <Route path="boxes" element={<BoxesPage />}></Route>
                 <Route path="*" element={<p>Not found</p>}></Route>

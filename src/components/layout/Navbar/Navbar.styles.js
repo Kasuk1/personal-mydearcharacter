@@ -8,23 +8,13 @@ const NavbarStyles = styled.nav`
     position: fixed;
     width: 100%;
     z-index: 100;
-
-    display: grid;
-    grid-template-columns: repeat(12, [col-start] minmax(0.5rem, 10.14rem) [col-end]);
-    column-gap: 2rem;
-    justify-content: center;
-    align-items: center;
     
     @media only screen and (min-width: 87.5em) {
         padding: 2.5rem 3rem;
-        column-gap: 1.5rem;
-    }
-  
-    @media only screen and (min-width: 112.5em) {
-        column-gap: 2.5rem;
     }
 
     .navbar__logo {
+        cursor: pointer;
         font-size: 3rem;
         letter-spacing: -.8rem;
 
@@ -42,7 +32,7 @@ const NavbarStyles = styled.nav`
 
     .navbar__list {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         column-gap: 1rem;
 
@@ -86,7 +76,7 @@ const NavbarStyles = styled.nav`
     }
 
     .navbar__list--small {
-        background-color:inherit;
+        background-color: ${props => props.theme.primaryColor};
         top: 100%;
         right: -100%;
         padding: 3rem 3rem 2rem 3rem;

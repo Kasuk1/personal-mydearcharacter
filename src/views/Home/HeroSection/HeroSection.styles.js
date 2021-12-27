@@ -6,22 +6,13 @@ const HeroSectionStyles = styled.section`
     padding-top: 7rem;
     transition: all 0.2s;
 
-    display: grid;
-    grid-template-columns: repeat(12, [col-start] minmax(0.5rem, 10.14rem) [col-end]);
-    column-gap: 1rem;
-    justify-content: center;
-    align-items: center;
-
     @media only screen and (min-width: 87.5em) {
-        column-gap: 1.5rem;
         padding-top: 8rem;
     }
   
     @media only screen and (min-width: 112.5em) {
-        column-gap: 2.5rem;
         padding-top: 10rem;
     }
-
 
     .hero-section {
         &--left {
@@ -48,16 +39,14 @@ const HeroSectionStyles = styled.section`
         }
 
         &--right {
+            grid-column: 5 / -1;
+            grid-row: 1 / 2;
             width: 100%;
             height: 100%;
             z-index: 5;
             position: relative;
-            display: none;
 
             @media only screen and (min-width: 25em) {
-                display: block;
-                grid-column: 5 / -1;
-                grid-row: 1 / 2;
             }
 
             @media only screen and (min-width: 37.5em) {
