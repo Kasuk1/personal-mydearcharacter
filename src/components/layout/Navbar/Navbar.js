@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faToggleOn, faToggleOff, faUserAstronaut, faBox, faCoins, faCommentDots, faPaintBrush } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faToggleOn, faToggleOff, faUserAstronaut, faBox, faCoins, faCommentDots } from '@fortawesome/free-solid-svg-icons';
 
 import { handleShowMenu, handleTheme, selectDarkTheme, selectShowMenu } from '../../../features/layout/layout.slice';
 import { Container } from '../Container/Container';

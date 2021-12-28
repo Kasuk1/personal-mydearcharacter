@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { CardDetail } from "../../../components/CharacterCard/CardDetail/CardDetail";
+import { Container } from "../../../components/layout/Container/Container";
+import { CardDetailLoading } from "../../../components/CharacterCard/CardDetail/CardDetailLoading";
 
 import { getCharacterDetail, selectCharacter, selectGetCharacterDetailLoading } from "../../../features/character/character.slice";
 
@@ -15,14 +17,21 @@ export const CharacterDetail = () => {
     const characterLoading = useSelector(selectGetCharacterDetailLoading);
 
     useEffect(() => {
-        dispatch(getCharacterDetail(characterId))
+        dispatch(getCharacterDetail(characterId));
+        window.scrollTo(0, 0);
     }, [dispatch, characterId]);
-
-    if (characterLoading) return <h1>Loading...</h1>
 
     return (
         <CharacterDetailStyles>
-            <CardDetail {...character} />
+            <Container>
+                <div className='character-detail__left'>
+                    {characterLoading ? <CardDetailLoading /> : (
+                        <CardDetail {...character} />
+                    )}
+                </div>
+                <div className='character-detail__right'>
+                </div>
+            </Container>
         </CharacterDetailStyles>
     )
 }

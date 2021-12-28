@@ -26,13 +26,18 @@ const CardDetailStyles = styled.article`
         }
 
         &__image {
-            
-            position: relative;
             margin-top: -10rem;
             bottom: -10rem;
+            position: relative;
 
             & img {
+                cursor: pointer;
                 width: 100%;
+                transition: all 0.2s;
+
+                &.clicked {
+                    transform: scale(1.8);
+                }
             }
         }
 

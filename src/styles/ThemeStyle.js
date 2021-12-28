@@ -11,6 +11,7 @@ export const darkTheme = {
     cardSecondaryColor: '#605678',
     cardTextColor: '#F6F3FC',
     cardSingleTextColor: '#4C4361',
+    cardExtraLoadingColor: '#4C4361',
 
     buttonPrimaryBackgroundColor: '#442D50',
     buttonPrimaryTextColor: '#EDE6F9',
@@ -30,6 +31,7 @@ export const lightTheme = {
     cardSecondaryColor: '#605678',
     cardTextColor: '#F6F3FC',
     cardSingleTextColor: '#F6F3FC',
+    cardExtraLoadingColor: '#4C4361',
 
     buttonPrimaryBackgroundColor: '#442D50',
     buttonPrimaryTextColor: '#EDE6F9',

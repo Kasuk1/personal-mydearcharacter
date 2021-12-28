@@ -38,6 +38,15 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         min-height: 100vh;
     }
+
+    @keyframes opacityLoading {
+            from {
+                opacity: 0.5;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 `;
 
 export default GlobalStyle;

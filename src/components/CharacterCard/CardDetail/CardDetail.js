@@ -1,15 +1,25 @@
-import CardDetailStyles from './CardDetail.styles';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoins } from '@fortawesome/free-solid-svg-icons'
 
+import { handleImageClick, selectImageClicked } from '../../../features/layout/layout.slice';
+
+import CardDetailStyles from './CardDetail.styles';
+
+
 export const CardDetail = ({ name, image, sprites, anime, types, abilities, height, weight, price, level, power }) => {
+    const dispatch = useDispatch();
+    const imageClicked = useSelector(selectImageClicked);
+
     return (
         <CardDetailStyles>
             <h3 className='card-detail__name'>{name}</h3>
             <div className='card-detail__image'>
-                {image && <img src={image} alt={name} />}
-                {sprites && <img src={sprites.other['official-artwork'].front_default} alt={name} />}
+                <img className={imageClicked ? 'clicked' : ''}
+                    src={image ? image : sprites ? sprites.other['official-artwork'].front_default : ''}
+                    alt={name}
+                    onClick={() => dispatch(handleImageClick())}
+                />
             </div>
             <div className='card-detail__info'>
                 <div className='card-detail__info--basic'>

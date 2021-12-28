@@ -5,7 +5,7 @@ const CardLoadingStyles = styled.div`
     border-radius: 0.8rem;
     padding: 2rem 1.8rem;
     width: 19.3rem;
-    animation: opacityLoading 0.6s infinite alternate; 
+    animation: opacityLoading 0.6s infinite alternate;
 
     display: flex;
     flex-direction: column;
@@ -36,15 +36,6 @@ const CardLoadingStyles = styled.div`
                 border-radius: 0.5rem;
                 width: 12rem;
                 height: 3rem;
-            }
-        }
-
-        @keyframes opacityLoading {
-            from {
-                opacity: 0.5;
-            }
-            to {
-                opacity: 1;
             }
         }
     }
