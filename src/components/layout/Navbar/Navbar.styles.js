@@ -13,6 +13,21 @@ const NavbarStyles = styled.nav`
         padding: 2.5rem 3rem;
     }
 
+    &.scrolled {
+        background-color: ${props => props.theme.secondaryColor};
+        color: ${props => props.theme.tertiaryColor};
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+
+        & a, & li {
+            color: ${props => props.theme.tertiaryColor};
+        }
+
+        & .navbar__list--small {
+            background-color: ${props => props.theme.secondaryColor};
+        }
+    }
+
     .navbar__logo {
         cursor: pointer;
         font-size: 3rem;
@@ -77,17 +92,28 @@ const NavbarStyles = styled.nav`
 
     .navbar__list--small {
         background-color: ${props => props.theme.primaryColor};
+        border-bottom-left-radius: 0.8rem;
         top: 100%;
-        right: -100%;
+        left: 100%;
         padding: 3rem 3rem 2rem 3rem;
         width: 100%;
         position: absolute;
-        transition: right 1s;
+        transition: left 1s, background-color 0.2s, color 0.2s;
 
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        justify-content: center;
         gap: 2rem;
+
+        & a, & li, & .navbar__item--icon {
+            font-size: 3rem;
+
+            @media only screen and (min-width: 37.5em) {
+                font-size: 1.6rem;
+            }
+
+        }
     }
 `;
 

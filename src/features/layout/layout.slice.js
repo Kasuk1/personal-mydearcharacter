@@ -4,8 +4,7 @@ const layoutSlice = createSlice({
     name: 'layout',
     initialState: {
         darkTheme: true,
-        showMenu: false,
-        navbarScroll: false
+        showMenu: false
     },
     reducers: {
         handleTheme(state) {
@@ -13,9 +12,6 @@ const layoutSlice = createSlice({
         },
         handleShowMenu(state) {
             state.showMenu = !state.showMenu;
-        },
-        handleNavbarScroll(state, action) {
-            state.navbarScroll = action.payload;
         }
     }
 });
@@ -24,6 +20,6 @@ export const selectDarkTheme = (state) => state.layout.darkTheme;
 export const selectShowMenu = (state) => state.layout.showMenu;
 export const selectNavbarScroll = (state) => state.layout.navbarScroll;
 
-export const { handleTheme, handleShowMenu, handleNavbarScroll } = layoutSlice.actions;
+export const { handleTheme, handleShowMenu } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

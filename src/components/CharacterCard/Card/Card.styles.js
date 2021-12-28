@@ -15,8 +15,8 @@ const CardStyles = styled.article`
     flex-direction: column;
     gap: 2rem;
 
-    &:hover {
-        transform: scale(1.05);
+    &:hover .card__image {
+        transform: scale(1.3);
     }
 
     .card {
@@ -33,7 +33,8 @@ const CardStyles = styled.article`
         }
 
         &__image {
-            
+            transition: all 0.2s;
+
             & img {
                 width: 100%;
             }
