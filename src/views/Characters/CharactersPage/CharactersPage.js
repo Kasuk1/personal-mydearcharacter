@@ -1,9 +1,10 @@
-import React from 'react'
+import { Characters } from "../Characters/Characters";
 
 export const CharactersPage = () => {
+
     return (
-        <div>
-            <h1>Characters Here!!!</h1>
-        </div>
+        <main>
+            <Characters />
+        </main>
     )
 }

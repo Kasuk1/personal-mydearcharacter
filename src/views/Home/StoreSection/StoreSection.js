@@ -8,16 +8,22 @@ import StoreSectionStyles from "./StoreSection.styles";
 
 const cards = [
     {
+        id: 16,
         name: 'Charizard',
         image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
         anime: 'pokemon',
-        type: [
-            { name: 'fire', url: 'https://pokeapi.co/api/v2/type/10/' },
-            { name: 'flying', url: 'https://pokeapi.co/api/v2/type/3/' }
+        types: [
+            {
+                type: {
+                    name: 'fire',
+                    url: 'https://pokeapi.co/api/v2/type/10/'
+                }
+            },
+            { type: { name: 'flying', url: 'https://pokeapi.co/api/v2/type/3/' } }
         ],
-        skill: [
-            { name: 'blaze', url: 'https://pokeapi.co/api/v2/ability/66/' },
-            { name: 'solar-power', url: 'https://pokeapi.co/api/v2/ability/94/' }
+        abilities: [
+            { ability: { name: 'blaze', url: 'https://pokeapi.co/api/v2/ability/66/' } },
+            { ability: { name: 'solar-power', url: 'https://pokeapi.co/api/v2/ability/94/' } }
         ],
         height: 17,
         weight: 905,
@@ -26,6 +32,7 @@ const cards = [
         power: 100
     },
     {
+        id: 21,
         name: 'Bulbasaur',
         image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
         anime: 'pokemon',
@@ -55,7 +62,7 @@ export const StoreSection = () => {
                     <ButtonPrimary path="/characters" text="See characters" />
                 </div>
                 <div className="store-section--right">
-                    {cards.map(card => <CardDetail {...card} />)}
+                    {cards.map(card => <CardDetail key={card.id} {...card} />)}
                 </div>
             </Container>
         </StoreSectionStyles>

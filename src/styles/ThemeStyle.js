@@ -10,6 +10,7 @@ export const darkTheme = {
     cardPrimaryColor: '#EDE6F9',
     cardSecondaryColor: '#605678',
     cardTextColor: '#F6F3FC',
+    cardSingleTextColor: '#4C4361',
 
     buttonPrimaryBackgroundColor: '#442D50',
     buttonPrimaryTextColor: '#EDE6F9',
@@ -28,6 +29,7 @@ export const lightTheme = {
     cardPrimaryColor: '#4C4361',
     cardSecondaryColor: '#605678',
     cardTextColor: '#F6F3FC',
+    cardSingleTextColor: '#F6F3FC',
 
     buttonPrimaryBackgroundColor: '#442D50',
     buttonPrimaryTextColor: '#EDE6F9',

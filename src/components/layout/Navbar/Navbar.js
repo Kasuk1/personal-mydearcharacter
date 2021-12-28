@@ -8,6 +8,7 @@ import { handleNavbarScroll, handleShowMenu, handleTheme, selectDarkTheme, selec
 import { Container } from '../Container/Container';
 
 import NavbarStyles from './Navbar.styles';
+import { useEffect } from 'react';
 
 export const Navbar = () => {
     const navigate = useNavigate();
@@ -28,14 +29,23 @@ export const Navbar = () => {
     };
 
     const handleNavbarSCroll = () => {
-        if (window.scrollY >= 90) {
-            dispatch(handleNavbarScroll(true));
-        } else {
-            dispatch(handleNavbarScroll(false));
-        }
+
     };
 
-    window.addEventListener('scroll', handleNavbarSCroll);
+    useEffect(() => {
+        const scroll = window.addEventListener('scroll', () => {
+            if (window.scrollY >= 90) {
+                dispatch(handleNavbarScroll(true));
+            }
+            if (window.scrollY < 90) {
+                dispatch(handleNavbarScroll(false));
+            }
+            return;
+        });
+
+        return () => window.removeEventListener('scroll', scroll);
+    }, [dispatch])
+
 
     const scrollNavbarStyles = {
         paddingTop: '0.6rem',
