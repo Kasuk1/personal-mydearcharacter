@@ -36,7 +36,7 @@ const NavbarStyles = styled.nav`
         grid-column: 1 / 4;
 
         @media only screen and (min-width: 37.5em) {
-            grid-column: 2 / 4;
+            grid-column: 2 / 3;
             font-size: 3.5rem;
         }
 

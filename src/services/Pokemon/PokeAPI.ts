@@ -22,8 +22,8 @@ export const PokeAPI = {
     },
 
     async getRandomCharacters(): Promise<Pokemon[]> {
-        const randomNumber1 = (Math.floor(Math.random() * 500 ) + 1).toString();
-        const randomNumber2 = (Math.floor(Math.random() * 500 ) + 1).toString();
+        const randomNumber1 = (Math.floor(Math.random() * 850 ) + 1).toString();
+        const randomNumber2 = (Math.floor(Math.random() * 850 ) + 1).toString();
         const pokemon1 = await PokeAPI.getCharacterDetail(randomNumber1);
         const pokemon2 = await PokeAPI.getCharacterDetail(randomNumber2);
         return [
