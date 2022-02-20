@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import layoutReducer from '../features/layout/layout.slice';
-import charactersReducer from '../features/characters/characters.slice';
-import characterReducer from '../features/character/character.slice';
+import layoutReducer from 'features/layout/layout.slice';
+import charactersReducer from 'features/characters/characters.slice';
+import characterReducer from 'features/character/character.slice';
+import authenticationReducer from 'features/authentication/authentication.slice';
 
 export const store = configureStore({
   reducer: {
     layout: layoutReducer,
     characters: charactersReducer,
-    character: characterReducer
+    character: characterReducer,
+    authentication: authenticationReducer,
   },
 });
 

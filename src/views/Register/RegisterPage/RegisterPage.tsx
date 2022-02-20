@@ -1,13 +1,34 @@
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+
 import { Container } from 'components/layout/Container/Container';
 import { ButtonSubmit } from 'components/Buttons/ButtonSubmit/ButtonSubmit';
-import { rickAndMortyPortal } from 'assets';
-import RegisterStyles from './RegisterPage.styles';
 import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
 import { Heading2 } from 'components/Headings/Heading2/Heading2';
 
+import {
+  selectRegisterForm,
+  setAuthenticationForm,
+} from 'features/authentication/authentication.slice';
+import { rickAndMortyPortal } from 'assets';
+import RegisterStyles from './RegisterPage.styles';
+
 export const RegisterPage = () => {
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useAppDispatch();
+  const { nickname, email, password } = useAppSelector(selectRegisterForm);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      setAuthenticationForm({
+        formName: 'registerForm',
+        name: e.target.name,
+        value: e.target.value,
+      })
+    );
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(nickname, email, password);
   };
 
   return (
@@ -17,7 +38,7 @@ export const RegisterPage = () => {
           <img src={rickAndMortyPortal} alt='' />
         </div>
         <div className='register-page__right'>
-          <form className='register-form' onSubmit={onSubmit}>
+          <form className='register-form' onSubmit={handleSubmit}>
             <div className='register-form__header'>
               <Heading2>Register</Heading2>
               <Paragraph>
@@ -29,19 +50,25 @@ export const RegisterPage = () => {
               className='register-form__input'
               type='text'
               name='nickname'
+              value={nickname}
               placeholder='Nickname'
+              onChange={handleChange}
             />
             <input
               className='register-form__input'
               type='email'
               name='email'
+              value={email}
               placeholder='Email'
+              onChange={handleChange}
             />
             <input
               className='register-form__input'
               type='password'
               name='password'
+              value={password}
               placeholder='Password'
+              onChange={handleChange}
             />
             <ButtonSubmit text='Register now!' />
           </form>
