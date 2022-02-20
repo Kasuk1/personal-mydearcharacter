@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,10 +9,11 @@ import {
   faToggleOn,
   faToggleOff,
   faUserAstronaut,
-  faBox,
   faCoins,
-  faCommentDots,
+  faGamepad,
   faUserCircle,
+  faSignInAlt,
+  faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -24,15 +25,20 @@ import {
 import { Container } from '../Container/Container';
 
 import NavbarStyles from './Navbar.styles';
+import {
+  logout,
+  selectUser,
+} from 'features/authentication/authentication.slice';
 
 export const Navbar: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isTabletScreen = useMediaQuery({ query: '(min-width: 37.5em)' });
-  const isDesktopScreen = useMediaQuery({ query: '(min-width: 87.5em)' });
-  const dispatch = useDispatch();
-  const isDarkTheme = useSelector(selectDarkTheme);
-  const showMenu = useSelector(selectShowMenu);
+  /* const isDesktopScreen = useMediaQuery({ query: '(min-width: 87.5em)' }); */
+  const isDarkTheme = useAppSelector(selectDarkTheme);
+  const showMenu = useAppSelector(selectShowMenu);
   const [scrolled, setScrolled] = useState(false);
+  const { isLogged } = useAppSelector(selectUser);
 
   const handleClickBars = () => {
     dispatch(handleShowMenu());
@@ -58,7 +64,7 @@ export const Navbar: React.FC = () => {
 
   const navbarList = () => (
     <ul
-      className={isDesktopScreen ? 'navbar__list' : 'navbar__list--small'}
+      className={isTabletScreen ? 'navbar__list' : 'navbar__list--small'}
       style={
         isTabletScreen && showMenu
           ? { left: '80%' }
@@ -67,6 +73,16 @@ export const Navbar: React.FC = () => {
           : {}
       }
     >
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            'navbar__item' + (isActive ? ' active' : '')
+          }
+          to='/game'
+        >
+          {isTabletScreen ? 'Game' : <FontAwesomeIcon icon={faGamepad} />}
+        </NavLink>
+      </li>
       <li>
         <NavLink
           className={({ isActive }) =>
@@ -81,7 +97,7 @@ export const Navbar: React.FC = () => {
           )}
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink
           className={({ isActive }) =>
             'navbar__item' + (isActive ? ' active' : '')
@@ -90,7 +106,7 @@ export const Navbar: React.FC = () => {
         >
           {isTabletScreen ? 'Boxes' : <FontAwesomeIcon icon={faBox} />}
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink
           className={({ isActive }) =>
@@ -101,16 +117,7 @@ export const Navbar: React.FC = () => {
           {isTabletScreen ? 'Coins' : <FontAwesomeIcon icon={faCoins} />}
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            'navbar__item' + (isActive ? ' active' : '')
-          }
-          to='/about'
-        >
-          {isTabletScreen ? 'About' : <FontAwesomeIcon icon={faCommentDots} />}
-        </NavLink>
-      </li>
+
       <li className='navbar__item'>
         {isDarkTheme && isTabletScreen
           ? 'Light '
@@ -124,17 +131,44 @@ export const Navbar: React.FC = () => {
         />
       </li>
       <li className='navbar__item'>
-        <NavLink
-          className={({ isActive }) =>
-            'navbar__item' + (isActive ? 'active' : '')
-          }
-          to='/profile'
-        >
-          <FontAwesomeIcon
-            className='navbar__item--avatar'
-            icon={faUserCircle}
-          />
-        </NavLink>
+        {isLogged ? (
+          <NavLink
+            className={({ isActive }) =>
+              'navbar__item' + (isActive ? ' active' : '')
+            }
+            to='/profile'
+          >
+            <FontAwesomeIcon
+              className='navbar__item--avatar'
+              icon={faUserCircle}
+            />
+          </NavLink>
+        ) : (
+          <NavLink
+            className={({ isActive }) =>
+              'navbar__item' + (isActive ? ' active' : '')
+            }
+            to='/auth/login'
+          >
+            {isTabletScreen ? 'Login' : <FontAwesomeIcon icon={faSignInAlt} />}
+          </NavLink>
+        )}
+      </li>
+      <li className='navbar__item'>
+        {isLogged && (
+          <NavLink
+            className={({ isActive }) =>
+              'navbar__item' + (isActive ? ' active' : '')
+            }
+            to='/auth/login'
+            onClick={() => dispatch(logout())}
+          >
+            <FontAwesomeIcon
+              className='navbar__item--avatar'
+              icon={faSignOutAlt}
+            />
+          </NavLink>
+        )}
       </li>
     </ul>
   );
@@ -146,7 +180,7 @@ export const Navbar: React.FC = () => {
           <span className='navbar__logo' onClick={() => navigate('/')}>
             MDC
           </span>
-          {isDesktopScreen ? (
+          {isTabletScreen ? (
             navbarList()
           ) : (
             <>

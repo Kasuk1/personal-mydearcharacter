@@ -7,6 +7,7 @@ import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
 import { Container } from 'components/layout/Container/Container';
 
 import {
+  login,
   selectLoginForm,
   setAuthenticationForm,
 } from 'features/authentication/authentication.slice';
@@ -28,7 +29,7 @@ export const LoginPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, password);
+    dispatch(login({ email, password }));
   };
 
   return (

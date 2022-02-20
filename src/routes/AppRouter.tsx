@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import { darkTheme, lightTheme } from 'styles/ThemeStyle';
 import { Navbar } from 'components/layout/Navbar/Navbar';
@@ -16,10 +16,21 @@ import { AuthRouter } from './AuthRouter';
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
 import { selectDarkTheme } from 'features/layout/layout.slice';
+import {
+  selectUser,
+  verifyToken,
+} from 'features/authentication/authentication.slice';
+import { useEffect } from 'react';
 
 export const AppRouter: React.FC = () => {
+  const dispatch = useAppDispatch();
   const isDarkTheme = useAppSelector(selectDarkTheme);
-  const isLogged = false;
+  const { isLogged } = useAppSelector(selectUser);
+
+  useEffect(() => {
+    console.log('dispatching verify token');
+    dispatch(verifyToken());
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>

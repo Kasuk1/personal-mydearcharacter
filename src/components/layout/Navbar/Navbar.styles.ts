@@ -52,7 +52,10 @@ const NavbarStyles = styled.nav`
     align-items: center;
     column-gap: 1rem;
 
-    @media only screen and (min-width: 87.5em) {
+    @media only screen and (min-width: 37.5em) {
+      grid-column: 4 / 12;
+    }
+    @media only screen and (min-width: 57.5em) {
       grid-column: 7 / 12;
     }
   }

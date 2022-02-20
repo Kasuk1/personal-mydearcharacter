@@ -6,6 +6,7 @@ import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
 import { Heading2 } from 'components/Headings/Heading2/Heading2';
 
 import {
+  register,
   selectRegisterForm,
   setAuthenticationForm,
 } from 'features/authentication/authentication.slice';
@@ -28,7 +29,7 @@ export const RegisterPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(nickname, email, password);
+    dispatch(register({ nickname, email, password }));
   };
 
   return (
