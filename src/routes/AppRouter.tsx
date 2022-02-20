@@ -1,22 +1,63 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { useAppSelector } from 'app/hooks';
 
+import { darkTheme, lightTheme } from 'styles/ThemeStyle';
+import { Navbar } from 'components/layout/Navbar/Navbar';
+import { Footer } from 'components/layout/Footer/Footer';
+import { HomePage } from 'views/Home/HomePage/HomePage';
+import { CharactersPage } from 'views/Characters/CharactersPage/CharactersPage';
+import { CharacterDetail } from 'views/Characters/CharacterDetail/CharacterDetail';
+import { CoinsPage } from 'views/Coins/CoinsPage/CoinsPage';
+import { BoxesPage } from 'views/Boxes/BoxesPage/BoxesPage';
+import { GamePage } from 'views/Game/GamePage';
+
+import { AuthRouter } from './AuthRouter';
+import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
+import { selectDarkTheme } from 'features/layout/layout.slice';
 
-import { darkTheme, lightTheme } from '../styles/ThemeStyle';
-import { selectDarkTheme } from '../features/layout/layout.slice';
-import { useAppSelector } from '../app/hooks';
+export const AppRouter: React.FC = () => {
+  const isDarkTheme = useAppSelector(selectDarkTheme);
+  const isLogged = false;
 
-export const AppRouter = () => {
-    const isDarkTheme = useAppSelector(selectDarkTheme);
+  return (
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <BrowserRouter>
+        <Navbar />
 
-    return (
-        <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/*" element={<PublicRoutes />}></Route>
-                </Routes>
-            </BrowserRouter>
-        </ThemeProvider>
-    )
-}
+        <Routes>
+          <Route
+            path='/auth/*'
+            element={
+              <PublicRoutes isLogged={isLogged}>
+                <AuthRouter />
+              </PublicRoutes>
+            }
+          />
+
+          <Route
+            path='/game'
+            element={
+              <PrivateRoutes isLogged={isLogged}>
+                <GamePage />
+              </PrivateRoutes>
+            }
+          />
+
+          <Route path='/' element={<HomePage />}></Route>
+          <Route path='characters' element={<CharactersPage />}></Route>
+          <Route
+            path='characters/:characterId'
+            element={<CharacterDetail />}
+          ></Route>
+          <Route path='coins' element={<CoinsPage />}></Route>
+          <Route path='boxes' element={<BoxesPage />}></Route>
+          <Route path='*' element={<p>Not found</p>}></Route>
+        </Routes>
+
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
+  );
+};
