@@ -10,7 +10,6 @@ import { CharactersPage } from 'views/Characters/CharactersPage/CharactersPage';
 import { CharacterDetail } from 'views/Characters/CharacterDetail/CharacterDetail';
 import { CoinsPage } from 'views/Coins/CoinsPage/CoinsPage';
 import { BoxesPage } from 'views/Boxes/BoxesPage/BoxesPage';
-import { GamePage } from 'views/Game/GamePage';
 
 import { AuthRouter } from './AuthRouter';
 import { PrivateRoutes } from './PrivateRoutes';
@@ -21,6 +20,7 @@ import {
   verifyToken,
 } from 'features/authentication/authentication.slice';
 import { useEffect } from 'react';
+import { GameRouter } from './GameRouter';
 
 export const AppRouter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -48,10 +48,10 @@ export const AppRouter: React.FC = () => {
           />
 
           <Route
-            path='/game'
+            path='/game/*'
             element={
               <PrivateRoutes isLogged={isLogged}>
-                <GamePage />
+                <GameRouter />
               </PrivateRoutes>
             }
           />

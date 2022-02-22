@@ -142,6 +142,13 @@ export const Navbar: React.FC = () => {
               className='navbar__item--avatar'
               icon={faUserCircle}
             />
+            <span
+              style={{
+                color: `${isDarkTheme ? '#B1FF05' : '#418F6E'}`,
+              }}
+            >
+              Online
+            </span>
           </NavLink>
         ) : (
           <NavLink

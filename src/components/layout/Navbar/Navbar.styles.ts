@@ -63,6 +63,9 @@ const NavbarStyles = styled.nav`
   .navbar__item {
     font-size: 1.6rem;
     color: ${(props) => props.theme.paragraphColor};
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
     &.active {
       text-decoration: underline;

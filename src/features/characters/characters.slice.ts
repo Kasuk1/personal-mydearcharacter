@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { PokeAPI } from '../../services/Pokemon/PokeAPI';
+import { PokeAPI } from '../../services/PokeAPI';
 import { CharactersState } from '../../interfaces';
 
 export const getCharacters = createAsyncThunk(

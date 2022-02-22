@@ -5,7 +5,7 @@ import {
   LoginFormState,
   RegisterFormState,
 } from 'interfaces/store/AuthenticationState.interface';
-import { MDCAPI } from 'services/Pokemon/MdcAPI';
+import { MDCAPI } from 'services/MdcAPI';
 
 export const register = createAsyncThunk(
   'authentication/register',
@@ -74,10 +74,12 @@ const authenticationSlice = createSlice({
     logout(state) {
       window.localStorage.clear();
       state.user = initialState.user;
+      state.authState = initialState.authState;
     },
   },
   extraReducers: (builder) => {
     builder
+      /* Handle Login Method */
       .addCase(login.pending, (state) => {
         state.authState.loading = true;
         state.authState.error = false;
@@ -103,6 +105,7 @@ const authenticationSlice = createSlice({
         state.authState.loading = false;
         state.authState.error = true;
       })
+      /* Handle Register Method */
       .addCase(register.pending, (state) => {
         state.authState.loading = true;
         state.authState.error = false;
@@ -128,6 +131,7 @@ const authenticationSlice = createSlice({
         state.authState.loading = false;
         state.authState.error = true;
       })
+      /* Handle VerifyToken Method */
       .addCase(verifyToken.pending, (state) => {
         state.authState.loading = true;
         state.authState.error = false;
