@@ -13,6 +13,7 @@ export interface Match {
   deckPlayer2?: [Card];
   healthPlayer1: number;
   healthPlayer2: number;
+  cardsSelected: [Card | null, Card | null];
   status: string;
   turns: number;
 }

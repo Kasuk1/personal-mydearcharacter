@@ -77,7 +77,7 @@ const MatchStyles = styled.section`
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
+      gap: 3rem;
 
       &-message {
         animation: opacityLoadingFull 0.6s infinite alternate;

@@ -39,12 +39,6 @@ export const Lobby: React.FC = () => {
     });
   }, [socketContext?.socket, navigate]);
 
-  useEffect(() => {
-    socketContext?.socket?.on('canceled-game', () => {
-      navigate('/game');
-    });
-  }, [socketContext, navigate]);
-
   const handleCreateRoom = () => {
     socketContext?.socket?.emit('create-game');
   };

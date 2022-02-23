@@ -51,6 +51,18 @@ export const SocketProvider: React.FC = ({ children }) => {
     });
   }, [socket, dispatch]);
 
+  useEffect(() => {
+    socket?.on('selected-card', (game) => {
+      dispatch(setActiveMatch(game));
+    });
+  }, [socket, dispatch]);
+
+  useEffect(() => {
+    socket?.on('finished-game', () => {
+      dispatch(setActiveMatch(undefined));
+    });
+  }, [socket, dispatch]);
+
   return (
     <SocketContext.Provider value={{ socket, online }}>
       {children}

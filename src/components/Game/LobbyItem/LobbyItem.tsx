@@ -17,7 +17,12 @@ export const LobbyItem: React.FC<MatchItemProps> = ({ match }) => {
     if (match.status === 'waiting') {
       socketContext?.socket?.emit('join-game', match);
     }
+    return;
   };
+
+  if (match.status === 'finished') {
+    return <></>;
+  }
 
   return (
     <LobbyItemStyles

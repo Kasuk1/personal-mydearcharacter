@@ -14,6 +14,7 @@ import { selectActiveMatch } from 'features/game/game.slice';
 import { MatchCard } from 'components/Game/MatchCard/MatchCard';
 import { MatchCardHidden } from 'components/Game/MatchCardHidden/MatchCardHidden';
 import { ProgressBar } from 'components/Game/Mini/ProgressBar';
+import { CardsSelected } from '../../../components/Game/CardsSelected/CardsSelected';
 
 export const Match: React.FC = () => {
   const navigate = useNavigate();
@@ -30,6 +31,21 @@ export const Match: React.FC = () => {
   const handlePlayGame = () => {
     socketContext?.socket?.emit('play-game', gameId);
   };
+
+  useEffect(() => {
+    socketContext?.socket?.on('canceled-game', () => {
+      navigate('/game');
+    });
+  }, [socketContext, navigate]);
+
+  useEffect(() => {
+    if (activeMatch?.healthPlayer1! <= 0 || activeMatch?.healthPlayer2! <= 0) {
+      setTimeout(() => {
+        socketContext?.socket?.emit('finish-game', gameId);
+        navigate('/profile');
+      }, 3000);
+    }
+  }, [socketContext?.socket, navigate, activeMatch, gameId, uid]);
 
   /*  useEffect(() => {
     return () => {
@@ -95,13 +111,15 @@ export const Match: React.FC = () => {
               </span>
             )}
             {activeMatch?.status === 'playing' &&
-              activeMatch?.turns % 2 !== 0 && (
+              activeMatch?.turns % 2 !== 0 &&
+              activeMatch?.cardsSelected.length !== 2 && (
                 <span className='match__state-message'>
                   {activeMatch?.player1.nickname} turn!
                 </span>
               )}
             {activeMatch?.status === 'playing' &&
-              activeMatch?.turns % 2 === 0 && (
+              activeMatch?.turns % 2 === 0 &&
+              activeMatch?.cardsSelected.length !== 2 && (
                 <span className='match__state-message'>
                   {activeMatch.player2?.nickname} turn!
                 </span>
@@ -119,7 +137,7 @@ export const Match: React.FC = () => {
               )}
           </div>
 
-          {/* <CardsSelected /> */}
+          <CardsSelected />
 
           {activeMatch?.player2 && (
             <h2 className='match__player' style={{ alignSelf: 'flex-end' }}>

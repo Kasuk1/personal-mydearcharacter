@@ -5,6 +5,7 @@ const MatchCardHiddenStyles = styled.div`
   border-radius: 0.9rem;
   padding: 1.5rem 2rem 1rem;
   min-width: 20rem;
+  width: 20rem;
   height: 30rem;
 
     img {
