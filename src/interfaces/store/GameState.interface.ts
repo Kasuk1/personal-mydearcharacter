@@ -7,19 +7,29 @@ export interface GameState {
 
 export interface Match {
   _id: string;
-  player1: String;
-  player2?: String;
-  playerDeck1?: [Card];
-  playerDeck2?: [Card];
-  status: String;
-  turns: Number;
+  player1: Player;
+  player2?: Player;
+  deckPlayer1?: [Card];
+  deckPlayer2?: [Card];
+  healthPlayer1: number;
+  healthPlayer2: number;
+  status: string;
+  turns: number;
 }
 
+export interface Player {
+  uid: string;
+  nickname: string;
+  email: string;
+  level: number;
+  online: boolean;
+}
 export interface Card {
-  anime: String;
-  name: String;
-  image: String;
-  level: Number;
-  power: Number;
-  health: Number;
+  _id: string;
+  anime: string;
+  name: string;
+  image: string;
+  level: number;
+  power: number;
+  health: number;
 }

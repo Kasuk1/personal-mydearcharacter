@@ -40,13 +40,36 @@ const GlobalStyle = createGlobalStyle`
     }
 
     @keyframes opacityLoading {
-            from {
-                opacity: 0.5;
-            }
-            to {
-                opacity: 1;
-            }
+        from {
+            opacity: 0.5;
         }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes opacityLoadingFull {
+        from {
+            opacity: 0.1;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .display-flex {
+        display: flex;
+    }
+
+    .min-height-60 {
+        min-height: 60vh;
+    }
+    .min-height-70 {
+        min-height: 70vh;
+    }
+    .min-height-80 {
+        min-height: 80vh;
+    }
 `;
 
 export default GlobalStyle;

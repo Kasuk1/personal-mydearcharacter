@@ -5,6 +5,7 @@ import rickAndMorty from './images/rickandmorty.png';
 import saintSeiya from './images/saintseiya.png';
 import rickAndMortyPortal from './images/rickandmortyportal.png';
 import rickAndMortyNoPortal from './images/rickandmortynoportal.png';
+import lugia from './images/lugia.png';
 
 export {
   bannerMewto,
@@ -14,4 +15,5 @@ export {
   saintSeiya,
   rickAndMortyPortal,
   rickAndMortyNoPortal,
+  lugia,
 };

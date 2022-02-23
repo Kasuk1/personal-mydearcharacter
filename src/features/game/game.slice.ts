@@ -35,7 +35,6 @@ const gameSlice = createSlice({
         state.getMatchesState.loading = false;
         state.getMatchesState.error = false;
         const { ok, matches } = action.payload;
-        console.log(action.payload);
         if (ok) {
           state.matches = matches;
           state.getMatchesState.message = 'Matches successfully listed';

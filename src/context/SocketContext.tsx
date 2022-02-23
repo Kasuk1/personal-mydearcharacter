@@ -29,7 +29,6 @@ export const SocketProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     socket?.on('games-list', (matches) => {
-      console.log(matches);
       dispatch(getMatches());
     });
   }, [socket, dispatch]);
@@ -43,6 +42,12 @@ export const SocketProvider: React.FC = ({ children }) => {
   useEffect(() => {
     socket?.on('canceled-game', () => {
       dispatch(setActiveMatch(undefined));
+    });
+  }, [socket, dispatch]);
+
+  useEffect(() => {
+    socket?.on('started-game', (game) => {
+      dispatch(setActiveMatch(game));
     });
   }, [socket, dispatch]);
 

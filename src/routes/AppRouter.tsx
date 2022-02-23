@@ -21,6 +21,7 @@ import {
 } from 'features/authentication/authentication.slice';
 import { useEffect } from 'react';
 import { GameRouter } from './GameRouter';
+import { Match } from 'views/Game/Match/Match';
 
 export const AppRouter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,6 @@ export const AppRouter: React.FC = () => {
   const { isLogged } = useAppSelector(selectUser);
 
   useEffect(() => {
-    console.log('dispatching verify token');
     dispatch(verifyToken());
   }, [dispatch]);
 
@@ -36,7 +36,6 @@ export const AppRouter: React.FC = () => {
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <BrowserRouter>
         <Navbar />
-
         <Routes>
           <Route
             path='/auth/*'

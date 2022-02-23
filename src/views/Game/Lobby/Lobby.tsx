@@ -1,5 +1,7 @@
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { LobbyItem } from 'components/Game/LobbyItem';
+import { LobbyItem } from 'components/Game/LobbyItem/LobbyItem';
+import { Heading1 } from 'components/Headings/Heading1/Heading1';
+import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
 import { Container } from 'components/layout/Container/Container';
 import { SocketContext } from 'context/SocketContext';
 import { selectUser } from 'features/authentication/authentication.slice';
@@ -50,14 +52,25 @@ export const Lobby: React.FC = () => {
   return (
     <LobbyStyles>
       <Container>
-        <h1>Lobby here</h1>
-        <button type='button' onClick={handleCreateRoom}>
-          Create room
-        </button>
-        <div>
-          {matches?.map((match) => (
-            <LobbyItem key={match._id} match={match} />
-          ))}
+        <div className='lobby min-height-80'>
+          <div className='lobby__header'>
+            <div>
+              <Heading1>Lobby</Heading1>
+              <Paragraph>
+                Find an active room to join and play. Remember that an avaliable
+                room have a waiting state.
+              </Paragraph>
+            </div>
+            <button type='button' onClick={handleCreateRoom}>
+              Create room
+            </button>
+          </div>
+
+          <div className='lobby__rooms'>
+            {matches?.map((match) => (
+              <LobbyItem key={match._id} match={match} />
+            ))}
+          </div>
         </div>
       </Container>
     </LobbyStyles>

@@ -58,7 +58,6 @@ const layoutSlice = createSlice({
       .addCase(getRandomCharacters.fulfilled, (state, action) => {
         state.getRandomCharacters.getRandomCharactersLoading = false;
         state.getRandomCharacters.getRandomCharactersError = false;
-        console.log(action.payload);
         state.getRandomCharacters.randomCharacters = action.payload;
       })
       .addCase(getRandomCharacters.rejected, (state) => {
