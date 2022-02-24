@@ -19,7 +19,7 @@ export const SocketContext = createContext<SocketContextValue | null>(null);
 
 export const SocketProvider: React.FC = ({ children }) => {
   const { socket, online, connectSocket, disconnectSocket } = useSocket(
-    'http://localhost:8080'
+    `${process.env.REACT_APP_SOCKET}`
   );
   const dispatch = useAppDispatch();
   const { isLogged, uid } = useAppSelector(selectUser);
