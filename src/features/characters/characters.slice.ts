@@ -29,7 +29,6 @@ const charactersSlice = createSlice({
       .addCase(getCharacters.fulfilled, (state, action) => {
         state.getCharactersLoading = false;
         state.getCharactersError = false;
-        console.log(action.payload);
         state.next = action.payload.next;
         state.previous = action.payload.previous;
         state.characters = [

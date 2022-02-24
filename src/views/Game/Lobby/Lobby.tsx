@@ -21,7 +21,6 @@ export const Lobby: React.FC = () => {
 
   useEffect(() => {
     socketContext?.socket?.on('created-game', (game) => {
-      console.log(game);
       dispatch(setActiveMatch(game));
       navigate(`/game/${game._id}`);
     });
@@ -33,7 +32,6 @@ export const Lobby: React.FC = () => {
 
   useEffect(() => {
     socketContext?.socket?.on('joined-game', (game) => {
-      console.log(game);
       navigate(`/game/${game._id}`);
     });
   }, [socketContext?.socket, navigate]);
