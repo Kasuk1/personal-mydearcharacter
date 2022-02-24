@@ -4,18 +4,34 @@ import styled from 'styled-components';
 const UserMatchCardStyles = styled.div`
   .user-match-card {
     background: url(${rayqaza}), ${(props) => props.theme.cardPrimaryColor};
-    background-position: right -10% bottom 50%;
+    background-position: left 5rem bottom -8rem;
     background-repeat: no-repeat;
-    background-size: 45%;
+    background-size: 110%;
     border-radius: 2rem;
     box-shadow: 0.2rem 1rem 3rem rgba(0, 0, 0, 0.4);
     color: ${(props) => props.theme.cardSingleTextColor};
-    padding: 1rem 3rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 5rem;
+    gap: 2rem;
+
+    @media only screen and (min-width: 27.5em) {
+      background-position: left 15rem bottom -15rem;
+    }
+
+    @media only screen and (min-width: 37.5em) {
+      background-size: 80%;
+      background-position: left 25rem bottom -15rem;
+    }
+
+    @media only screen and (min-width: 57.5em) {
+      background-position: right -10% top 50%;
+      background-size: 45%;
+      padding: 1rem 3rem;
+      gap: 5rem;
+    }
 
     &.winner {
       opacity: 1;
@@ -92,10 +108,20 @@ const UserMatchCardStyles = styled.div`
     }
 
     &__deck {
-      width: 50rem;
       min-width: 20rem;
       display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
+
+      @media only screen and (min-width: 37.5em) {
+        width: 50rem;
+      }
+
+      @media only screen and (min-width: 87.5em) {
+      }
+
+      @media only screen and (min-width: 112.5em) {
+      }
 
       &-title {
       }
