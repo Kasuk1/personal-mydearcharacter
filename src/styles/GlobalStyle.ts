@@ -12,13 +12,14 @@ const GlobalStyle = createGlobalStyle`
     html {
         font-size: 54.5%;
         font-family: "Heebo", sans-serif;
+        box-sizing: border-box;
 
         @media only screen and (min-width: 37.5em) {
-            font-size: 58.5%;
+            font-size: 60.5%;
         }
 
         @media only screen and (min-width: 87.5em) {
-            font-size: 60.5%;
+            
         }
   
         @media only screen and (min-width: 112.5em) {
