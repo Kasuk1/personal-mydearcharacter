@@ -1,20 +1,26 @@
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useParams } from 'react-router-dom';
 import { SocketContext } from 'context/SocketContext';
 import { selectActiveMatch } from 'features/game/game.slice';
 import { Card } from 'interfaces/store/GameState.interface';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import MatchCardStyles from './MatchCard.styles';
 import { selectUser } from '../../../features/authentication/authentication.slice';
+import {
+  selectCardMatchSelected,
+  setCardMatchSelected,
+} from 'features/layout/layout.slice';
 interface MatchCardProps {
   card: Card;
 }
 
 export const MatchCard: React.FC<MatchCardProps> = ({ card }) => {
+  const dispatch = useAppDispatch();
   const { gameId } = useParams();
   const { anime, name, image, level, health, power } = card;
   const activeMatch = useAppSelector(selectActiveMatch);
   const { uid } = useAppSelector(selectUser);
+  const cardMatchSelected = useAppSelector(selectCardMatchSelected);
   const socketContext = useContext(SocketContext);
 
   const handleMatchCardClick = () => {
@@ -22,16 +28,20 @@ export const MatchCard: React.FC<MatchCardProps> = ({ card }) => {
       activeMatch?.status === 'playing' &&
       activeMatch?.player1.uid === uid &&
       activeMatch?.turns % 2 !== 0 &&
-      activeMatch?.cardsSelected.length !== 2
+      activeMatch?.cardsSelected.length !== 2 &&
+      !cardMatchSelected
     ) {
+      dispatch(setCardMatchSelected(true));
       socketContext?.socket?.emit('select-card', card, gameId);
     }
     if (
       activeMatch?.status === 'playing' &&
       activeMatch?.player2?.uid === uid &&
       activeMatch?.turns % 2 === 0 &&
-      activeMatch?.cardsSelected.length !== 2
+      activeMatch?.cardsSelected.length !== 2 &&
+      !cardMatchSelected
     ) {
+      dispatch(setCardMatchSelected(true));
       socketContext?.socket?.emit('select-card', card, gameId);
     }
   };

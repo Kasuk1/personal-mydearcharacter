@@ -57,6 +57,15 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+    @keyframes leftToRight {
+        0% {
+          left: -40%;
+        }
+        100% {
+          left: 110%;
+        }
+    }
+
     .display-flex {
         display: flex;
     }

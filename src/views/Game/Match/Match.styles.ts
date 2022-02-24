@@ -63,24 +63,31 @@ const MatchStyles = styled.section`
         height: 1rem;
 
         &-track {
-          background: ${(props) => props.theme.paragraphColor};
+          background: ${(props) => props.theme.secondaryColor};
         }
         &-thumb {
-          background: ${(props) => props.theme.secondaryColor};
+          background: ${(props) => props.theme.tertiaryColor};
         }
       }
     }
 
     &__state {
-      font-size: 2.5rem;
-      margin: 10rem 0 8rem;
+      margin: 5rem 0 8rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3rem;
+      gap: 2rem;
+      overflow: hidden;
 
       &-message {
-        animation: opacityLoadingFull 0.6s infinite alternate;
+        align-self: flex-start;
+        background-color: ${(props) => props.theme.cardPrimaryColor};
+        border-radius: 0.2rem;
+        color: ${(props) => props.theme.primaryColor};
+        font-size: 3rem;
+        padding: 0.2rem 2.5rem;
+        position: relative;
+        animation: leftToRight 12s linear infinite;
       }
 
       &-play {

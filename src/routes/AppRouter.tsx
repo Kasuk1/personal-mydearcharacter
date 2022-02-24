@@ -21,7 +21,7 @@ import {
 } from 'features/authentication/authentication.slice';
 import { useEffect } from 'react';
 import { GameRouter } from './GameRouter';
-import { Match } from 'views/Game/Match/Match';
+import { ProfilePage } from 'views/User/ProfilePage/ProfilePage';
 
 export const AppRouter: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -51,6 +51,15 @@ export const AppRouter: React.FC = () => {
             element={
               <PrivateRoutes isLogged={isLogged}>
                 <GameRouter />
+              </PrivateRoutes>
+            }
+          />
+
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoutes isLogged={isLogged}>
+                <ProfilePage />
               </PrivateRoutes>
             }
           />

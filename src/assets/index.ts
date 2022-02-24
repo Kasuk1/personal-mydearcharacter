@@ -6,6 +6,10 @@ import saintSeiya from './images/saintseiya.png';
 import rickAndMortyPortal from './images/rickandmortyportal.png';
 import rickAndMortyNoPortal from './images/rickandmortynoportal.png';
 import lugia from './images/lugia.png';
+import rayqaza from './images/rayqaza.png';
+import pikachu from './images/pikachu.png';
+import solgaleo from './images/solgaleo.png';
+import mewto from './images/mewto.png';
 
 export {
   bannerMewto,
@@ -16,4 +20,8 @@ export {
   rickAndMortyPortal,
   rickAndMortyNoPortal,
   lugia,
+  rayqaza,
+  pikachu,
+  solgaleo,
+  mewto,
 };

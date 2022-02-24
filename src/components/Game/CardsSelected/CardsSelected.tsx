@@ -5,6 +5,8 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectActiveMatch } from '../../../features/game/game.slice';
 import { SocketContext } from 'context/SocketContext';
 import { selectUser } from 'features/authentication/authentication.slice';
+import { CardWaiting } from '../Mini/CardWaiting';
+import { lugia, mewto } from 'assets';
 
 export const CardsSelected = () => {
   const { gameId } = useParams();
@@ -37,11 +39,14 @@ export const CardsSelected = () => {
 
   return (
     <CardsSelectedStyles>
-      {card1 && (
+      {card1 ? (
         <div className='card-selected'>
           <div className='card-selected__header'>
             <img src={card1.image} alt='' />
-            <span className='card-selected__level'>Lvl. ???</span>
+            <span className='card-selected__level'>
+              Lvl.{' '}
+              {activeMatch?.cardsSelected.length === 2 ? card1.level : '???'}
+            </span>
           </div>
 
           <div className='card-selected__info'>
@@ -51,17 +56,22 @@ export const CardsSelected = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <CardWaiting img={mewto} />
       )}
 
       {activeMatch?.cardsSelected.length === 2 && (
         <span className='card-selected__vs'>vs</span>
       )}
 
-      {card2 && (
+      {card2 ? (
         <div className='card-selected'>
           <div className='card-selected__header'>
             <img src={card2.image} alt='' />
-            <span className='card-selected__level'>Lvl. ???</span>
+            <span className='card-selected__level'>
+              Lvl.{' '}
+              {activeMatch?.cardsSelected.length === 2 ? card2.level : '???'}
+            </span>
           </div>
 
           <div className='card-selected__info'>
@@ -71,6 +81,8 @@ export const CardsSelected = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <CardWaiting img={lugia} />
       )}
     </CardsSelectedStyles>
   );

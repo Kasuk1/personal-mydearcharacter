@@ -9,17 +9,17 @@ export const getRandomCharacters = createAsyncThunk(
 );
 
 // Define a type for the slice state
+interface RandomCharacters {
+  randomCharacters: Pokemon[];
+  getRandomCharactersLoading: boolean;
+  getRandomCharactersError: boolean;
+}
 interface LayoutState {
   darkTheme: boolean;
   showMenu: boolean;
   imageClicked: boolean;
   getRandomCharacters: RandomCharacters;
-}
-
-interface RandomCharacters {
-  randomCharacters: Pokemon[];
-  getRandomCharactersLoading: boolean;
-  getRandomCharactersError: boolean;
+  cardMatchSelected: boolean;
 }
 
 // Define the initial state using that type
@@ -32,6 +32,7 @@ const initialState: LayoutState = {
     getRandomCharactersLoading: false,
     getRandomCharactersError: false,
   },
+  cardMatchSelected: false,
 };
 
 const layoutSlice = createSlice({
@@ -47,6 +48,9 @@ const layoutSlice = createSlice({
     },
     handleImageClick(state) {
       state.imageClicked = !state.imageClicked;
+    },
+    setCardMatchSelected(state, action) {
+      state.cardMatchSelected = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -74,7 +78,14 @@ export const selectImageClicked = (state: RootState) =>
 export const selectGetRandomCharacters = (state: RootState) =>
   state.layout.getRandomCharacters;
 
-export const { handleTheme, handleShowMenu, handleImageClick } =
-  layoutSlice.actions;
+export const selectCardMatchSelected = (state: RootState) =>
+  state.layout.cardMatchSelected;
+
+export const {
+  handleTheme,
+  handleShowMenu,
+  handleImageClick,
+  setCardMatchSelected,
+} = layoutSlice.actions;
 
 export default layoutSlice.reducer;

@@ -53,4 +53,17 @@ export const MDCAPI = {
     const json = await response.json();
     return json;
   },
+
+  async getMatchesByUserId(userId: string) {
+    const token = window.localStorage.getItem('token') || '';
+    const response = await fetch(`${MDCURL}/matches/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-token': token,
+      },
+    });
+    const json = await response.json();
+    return json;
+  },
 };

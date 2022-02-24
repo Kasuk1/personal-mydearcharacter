@@ -9,7 +9,6 @@ import {
   faToggleOn,
   faToggleOff,
   faUserAstronaut,
-  faCoins,
   faGamepad,
   faUserCircle,
   faSignInAlt,
@@ -38,7 +37,7 @@ export const Navbar: React.FC = () => {
   const isDarkTheme = useAppSelector(selectDarkTheme);
   const showMenu = useAppSelector(selectShowMenu);
   const [scrolled, setScrolled] = useState(false);
-  const { isLogged } = useAppSelector(selectUser);
+  const { nickname, isLogged, level } = useAppSelector(selectUser);
 
   const handleClickBars = () => {
     dispatch(handleShowMenu());
@@ -107,7 +106,7 @@ export const Navbar: React.FC = () => {
           {isTabletScreen ? 'Boxes' : <FontAwesomeIcon icon={faBox} />}
         </NavLink>
       </li> */}
-      <li>
+      {/* <li>
         <NavLink
           className={({ isActive }) =>
             'navbar__item' + (isActive ? ' active' : '')
@@ -116,7 +115,7 @@ export const Navbar: React.FC = () => {
         >
           {isTabletScreen ? 'Coins' : <FontAwesomeIcon icon={faCoins} />}
         </NavLink>
-      </li>
+      </li> */}
 
       <li className='navbar__item'>
         {isDarkTheme && isTabletScreen
@@ -147,7 +146,10 @@ export const Navbar: React.FC = () => {
                 color: `${isDarkTheme ? '#B1FF05' : '#418F6E'}`,
               }}
             >
-              Online
+              Lvl. {level}{' '}
+              <span style={{ fontWeight: '800', fontSize: '1.8rem' }}>
+                | {nickname}
+              </span>
             </span>
           </NavLink>
         ) : (

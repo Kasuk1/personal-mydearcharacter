@@ -1,5 +1,5 @@
-import { lugia } from 'assets';
 import styled from 'styled-components';
+import { lugia } from 'assets';
 
 const LobbyItemStyles = styled.div`
   background: url(${lugia}), ${(props) => props.theme.cardPrimaryColor};

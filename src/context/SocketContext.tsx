@@ -3,7 +3,12 @@ import { useSocket } from 'hooks/useSocket';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectUser } from '../features/authentication/authentication.slice';
 import { Socket } from 'socket.io-client';
-import { getMatches, setActiveMatch } from 'features/game/game.slice';
+import {
+  getMatches,
+  getMatchesByUserId,
+  setActiveMatch,
+} from 'features/game/game.slice';
+import { setCardMatchSelected } from 'features/layout/layout.slice';
 
 export interface SocketContextValue {
   socket: Socket | null;
@@ -17,7 +22,7 @@ export const SocketProvider: React.FC = ({ children }) => {
     'http://localhost:8080'
   );
   const dispatch = useAppDispatch();
-  const { isLogged } = useAppSelector(selectUser);
+  const { isLogged, uid } = useAppSelector(selectUser);
 
   useEffect(() => {
     isLogged && connectSocket();
@@ -28,7 +33,7 @@ export const SocketProvider: React.FC = ({ children }) => {
   }, [isLogged, disconnectSocket]);
 
   useEffect(() => {
-    socket?.on('games-list', (matches) => {
+    socket?.on('games-list', () => {
       dispatch(getMatches());
     });
   }, [socket, dispatch]);
@@ -53,6 +58,7 @@ export const SocketProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     socket?.on('selected-card', (game) => {
+      dispatch(setCardMatchSelected(false));
       dispatch(setActiveMatch(game));
     });
   }, [socket, dispatch]);
@@ -60,8 +66,9 @@ export const SocketProvider: React.FC = ({ children }) => {
   useEffect(() => {
     socket?.on('finished-game', () => {
       dispatch(setActiveMatch(undefined));
+      dispatch(getMatchesByUserId(uid!));
     });
-  }, [socket, dispatch]);
+  }, [socket, dispatch, uid]);
 
   return (
     <SocketContext.Provider value={{ socket, online }}>

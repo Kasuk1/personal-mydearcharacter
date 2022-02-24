@@ -11,14 +11,17 @@ export interface RegisterFormState {
   password: string;
 }
 
+export interface User {
+  uid?: string;
+  nickname?: string;
+  email?: string;
+  online?: boolean;
+  level?: number;
+  isLogged: boolean;
+}
+
 export interface AuthenticationState {
-  user: {
-    uid?: string;
-    nickname?: string;
-    email?: string;
-    online?: boolean;
-    isLogged: boolean;
-  };
+  user: User;
   loginForm: LoginFormState;
   registerForm: RegisterFormState;
   authState: ThunkMethodState;

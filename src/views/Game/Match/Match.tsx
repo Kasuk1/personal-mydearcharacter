@@ -43,7 +43,7 @@ export const Match: React.FC = () => {
       setTimeout(() => {
         socketContext?.socket?.emit('finish-game', gameId);
         navigate('/profile');
-      }, 3000);
+      }, 4000);
     }
   }, [socketContext?.socket, navigate, activeMatch, gameId, uid]);
 
@@ -53,19 +53,6 @@ export const Match: React.FC = () => {
       socketContext?.socket?.emit('cancel-game', gameId);
     };
   }, [socketContext?.socket, gameId]); */
-
-  /* useEffect(() => {
-    socketContext?.socket?.on('joined-game', (game) => {
-      console.log(game);
-    });
-  }, [socketContext?.socket]); */
-
-  /* useEffect(() => {
-    socketContext?.socket?.on('canceled-game', () => {
-      console.log('game canceled');
-      navigate('/game');
-    });
-  }, [socketContext?.socket, navigate]); */
 
   return (
     <MatchStyles>
@@ -112,18 +99,32 @@ export const Match: React.FC = () => {
             )}
             {activeMatch?.status === 'playing' &&
               activeMatch?.turns % 2 !== 0 &&
-              activeMatch?.cardsSelected.length !== 2 && (
+              activeMatch?.cardsSelected.length !== 2 &&
+              activeMatch?.healthPlayer1 > 0 &&
+              activeMatch?.healthPlayer2 > 0 && (
                 <span className='match__state-message'>
-                  {activeMatch?.player1.nickname} turn!
+                  Is your turn {activeMatch?.player1.nickname}!
                 </span>
               )}
             {activeMatch?.status === 'playing' &&
               activeMatch?.turns % 2 === 0 &&
-              activeMatch?.cardsSelected.length !== 2 && (
+              activeMatch?.cardsSelected.length !== 2 &&
+              activeMatch?.healthPlayer2 > 0 &&
+              activeMatch?.healthPlayer1 > 0 && (
                 <span className='match__state-message'>
-                  {activeMatch.player2?.nickname} turn!
+                  Is your turn {activeMatch.player2?.nickname}!
                 </span>
               )}
+            {activeMatch?.healthPlayer1! <= 0 && (
+              <span className='match__state-message'>
+                {activeMatch?.player2?.nickname} WINS!
+              </span>
+            )}
+            {activeMatch?.healthPlayer2! <= 0 && (
+              <span className='match__state-message'>
+                {activeMatch?.player1?.nickname} WINS!
+              </span>
+            )}
 
             {activeMatch?.status === 'full' &&
               activeMatch?.player1?.uid === uid && (
@@ -135,9 +136,8 @@ export const Match: React.FC = () => {
                   Play
                 </button>
               )}
+            <CardsSelected />
           </div>
-
-          <CardsSelected />
 
           {activeMatch?.player2 && (
             <h2 className='match__player' style={{ alignSelf: 'flex-end' }}>

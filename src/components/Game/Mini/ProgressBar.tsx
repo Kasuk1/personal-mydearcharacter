@@ -15,12 +15,12 @@ const ProgressBarStyles = styled.div`
 
   .label {
     color: ${(props) => props.theme.tertiaryColor};
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     font-weight: bold;
     position: absolute;
+    text-align: center;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
   }
 `;
 
@@ -35,7 +35,7 @@ export const ProgressBar: React.FC<{ basis: number; health: number }> = ({
         style={{ width: `${health / (basis / 100)}%` }}
       ></div>
       <span className='label'>
-        {health}/{basis}
+        {health}/{basis} HP
       </span>
     </ProgressBarStyles>
   );

@@ -1,8 +1,10 @@
 import { ThunkMethodState } from './ThunkMethodState.interface';
 export interface GameState {
   matches?: [Match];
+  userMatches?: [Match];
   activeMatch?: Match;
   getMatchesState: ThunkMethodState;
+  getMatchesByUserIdState: ThunkMethodState;
 }
 
 export interface Match {
@@ -16,6 +18,7 @@ export interface Match {
   cardsSelected: [Card | null, Card | null];
   status: string;
   turns: number;
+  winner: string;
 }
 
 export interface Player {
