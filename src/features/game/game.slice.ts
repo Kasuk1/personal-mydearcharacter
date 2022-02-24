@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { GameState } from 'interfaces/store/GameState.interface';
 import { MDCAPI } from 'services/MdcAPI';
 import { RootState } from '../../app/store';

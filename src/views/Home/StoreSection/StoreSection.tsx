@@ -15,11 +15,7 @@ import StoreSectionStyles from './StoreSection.styles';
 
 export const StoreSection = () => {
   const dispatch = useAppDispatch();
-  const {
-    randomCharacters,
-    getRandomCharactersLoading,
-    getRandomCharactersError,
-  } = useAppSelector(selectGetRandomCharacters);
+  const { randomCharacters } = useAppSelector(selectGetRandomCharacters);
 
   useEffect(() => {
     dispatch(getRandomCharacters());

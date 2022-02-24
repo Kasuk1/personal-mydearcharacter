@@ -4,7 +4,6 @@ import { Heading1 } from 'components/Headings/Heading1/Heading1';
 import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
 import { Container } from 'components/layout/Container/Container';
 import { SocketContext } from 'context/SocketContext';
-import { selectUser } from 'features/authentication/authentication.slice';
 import {
   getMatches,
   selectMatches,
