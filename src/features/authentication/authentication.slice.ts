@@ -27,13 +27,13 @@ const initialState: AuthenticationState = {
     isLogged: false,
   },
   registerForm: {
-    nickname: 'Luhh',
-    email: 'lucero@hotmail.com',
-    password: '123456',
+    nickname: '',
+    email: '',
+    password: '',
   },
   loginForm: {
-    email: 'igor2008_11@hotmail.com',
-    password: '123456',
+    email: '',
+    password: '',
   },
   authState: {
     loading: false,
