@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const CardWaitingStyles = styled.div`
   width: 30rem;
-  min-width: 20rem;
   position: relative;
   animation: opacityLoadingFull 1.5s infinite alternate;
 

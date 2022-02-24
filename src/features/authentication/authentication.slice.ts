@@ -88,7 +88,6 @@ const authenticationSlice = createSlice({
         state.authState.loading = false;
         state.authState.error = false;
         const { ok, user, token } = action.payload;
-        console.log(action.payload);
         if (ok) {
           window.localStorage.setItem('token', token);
           state.user = {
@@ -114,7 +113,6 @@ const authenticationSlice = createSlice({
         state.authState.loading = false;
         state.authState.error = false;
         const { ok, user, token } = action.payload;
-        console.log(action.payload);
         if (ok) {
           window.localStorage.setItem('token', token);
           state.user = {

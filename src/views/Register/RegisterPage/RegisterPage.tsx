@@ -33,7 +33,7 @@ export const RegisterPage = () => {
   };
 
   return (
-    <RegisterStyles>
+    <RegisterStyles className='min-height-85'>
       <Container>
         <div className='register-page__left'>
           <img src={rickAndMortyPortal} alt='' />

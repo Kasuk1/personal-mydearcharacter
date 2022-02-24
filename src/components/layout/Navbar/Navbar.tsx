@@ -141,16 +141,18 @@ export const Navbar: React.FC = () => {
               className='navbar__item--avatar'
               icon={faUserCircle}
             />
-            <span
-              style={{
-                color: `${isDarkTheme ? '#B1FF05' : '#418F6E'}`,
-              }}
-            >
-              Lvl. {level}{' '}
-              <span style={{ fontWeight: '800', fontSize: '1.8rem' }}>
-                | {nickname}
+            {isTabletScreen && (
+              <span
+                style={{
+                  color: `${isDarkTheme ? '#B1FF05' : '#418F6E'}`,
+                }}
+              >
+                Lvl. {level}{' '}
+                <span style={{ fontWeight: '800', fontSize: '1.8rem' }}>
+                  | {nickname}
+                </span>
               </span>
-            </span>
+            )}
           </NavLink>
         ) : (
           <NavLink

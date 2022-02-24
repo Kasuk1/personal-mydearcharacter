@@ -79,6 +79,15 @@ const GlobalStyle = createGlobalStyle`
     .min-height-80 {
         min-height: 80vh;
     }
+    .min-height-85 {
+        min-height: 85vh;
+    }
+    .min-height-90 {
+        min-height: 90vh;
+    }
+    .min-height-100 {
+        min-height: 100vh;
+    }
 `;
 
 export default GlobalStyle;

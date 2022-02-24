@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const CardsSelectedStyles = styled.div`
   border-radius: 0.9rem;
   padding: 1.5rem 2rem 1rem;
-  min-width: 20rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 2.5rem;

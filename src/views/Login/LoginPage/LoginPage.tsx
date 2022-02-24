@@ -33,7 +33,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <LoginStyles>
+    <LoginStyles className='min-height-85'>
       <Container>
         <div className='login-page__left'>
           <img src={rickAndMortyNoPortal} alt='' />
