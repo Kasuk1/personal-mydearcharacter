@@ -13,7 +13,7 @@ const LobbyItemStyles = styled.div`
   opacity: 0.85;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   transition: all 0.3s;
 
   &:hover {
@@ -36,42 +36,51 @@ const LobbyItemStyles = styled.div`
 
   .lobby-item {
     &__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
       & span {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: 800;
         text-transform: uppercase;
       }
 
-      & p {
-        font-size: 1.9rem;
+      & .id {
+        display: none;
 
-        &.waiting {
+        @media only screen and (min-width: 57.5em) {
+          display: block;
+        }
+      }
+
+      & p {
+        font-size: 2rem;
+
+        &.status {
           background-color: rgba(0, 0, 0, 0.5);
           border-radius: 2rem;
-          color: #c3ff00;
-          font-size: 1.6rem;
-          font-weight: 800;
-          padding: 0.1rem 1rem;
-          text-transform: uppercase;
-          animation: opacityLoadingFull 0.6s infinite alternate;
-        }
-
-        &.full {
-          background-color: rgba(0, 0, 0, 0.4);
-          border-radius: 2rem;
-          color: #f9394f;
           font-size: 1.6rem;
           font-weight: 600;
           padding: 0.1rem 1rem;
           text-transform: uppercase;
+
+          &.waiting {
+            color: #c3ff00;
+            animation: opacityLoadingFull 0.6s infinite alternate;
+          }
+          &.full {
+            color: #f9394f;
+          }
         }
       }
     }
 
     &__type {
       background-color: ${(props) => props.theme.cardSingleTextColor};
-      border-radius: 50%;
-      padding: 1rem;
+      border-radius: 5rem;
+      font-size: 1.6rem !important;
+      padding: 0.1rem 2rem;
       color: ${(props) => props.theme.cardPrimaryColor};
     }
   }

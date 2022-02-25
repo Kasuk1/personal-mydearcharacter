@@ -36,20 +36,22 @@ export const LobbyItem: React.FC<MatchItemProps> = ({ match }) => {
         </p>
       </div>
       <div className='lobby-item__wrapper'>
-        <span>Match ID</span>
-        <p>{_id}</p>
+        <span className='id'>Match ID</span>
+        <p className='id'>{_id}</p>
       </div>
       <div className='lobby-item__wrapper'>
         <span>Status</span>
-        <p className={`${match?.status === 'waiting' ? 'waiting' : 'full'}`}>
+        <p
+          className={`status ${
+            match?.status === 'waiting' ? 'waiting' : 'full'
+          }`}
+        >
           <FontAwesomeIcon icon={faCircle} /> {status}
         </p>
       </div>
       <div className='lobby-item__wrapper'>
         <span>Game</span>
-        <div className='lobby-item__type'>
-          <p>1v1</p>
-        </div>
+        <p className='lobby-item__type'>1v1</p>
       </div>
     </LobbyItemStyles>
   );

@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ParagraphStyles = styled.p`
-    color: ${props => props.theme.paragraphColor};
-    font-size: 1.2rem;
+  color: ${(props) => props.theme.paragraphColor};
+  font-size: 1.6rem;
 
-    @media only screen and (min-width: 87.5em) {
-        font-size: 1.8rem;
-    }
+  @media only screen and (min-width: 87.5em) {
+    font-size: 1.8rem;
+  }
 `;
 
 export default ParagraphStyles;

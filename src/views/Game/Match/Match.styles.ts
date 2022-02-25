@@ -12,22 +12,30 @@ const MatchStyles = styled.section`
     grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 
     &__headers {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
 
       & h1 {
         font-size: 5rem;
       }
 
       & button {
-        background-color: ${(props) => props.theme.buttonPrimaryTextColor};
+        background-color: ${(props) =>
+          props.theme.buttonPrimaryBackgroundColor};
         border: none;
         border-radius: 5rem;
+        color: ${(props) => props.theme.buttonPrimaryTextColor};
         cursor: pointer;
-        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+        font-family: inherit;
+        min-width: 14rem;
+        padding: 1.2rem 0;
         transition: all 0.2s;
 
         &:hover {
@@ -46,7 +54,7 @@ const MatchStyles = styled.section`
       padding: 0.8rem 3rem 1.5rem;
       font-size: 2.5rem;
       position: relative;
-      top: 2rem;
+      top: 5rem;
       z-index: 2;
       align-self: flex-start;
       width: 35%;

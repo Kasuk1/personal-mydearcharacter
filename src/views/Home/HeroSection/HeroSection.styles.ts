@@ -91,7 +91,7 @@ const HeroSectionStyles = styled.section`
 
     &__span {
       color: ${(props) => props.theme.paragraphColor};
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       width: max-content;
       transition: all 0.25s;
 
