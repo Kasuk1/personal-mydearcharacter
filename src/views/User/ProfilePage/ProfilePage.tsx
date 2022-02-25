@@ -12,6 +12,7 @@ import ProfilePageStyles from './ProfilePage.styles';
 import { selectGetMatchesByUserIdState } from '../../../features/game/game.slice';
 import { UserMatchCard } from 'components/User/UserMatchCard/UserMatchCard';
 import { Heading2 } from 'components/Headings/Heading2/Heading2';
+import { NoItems } from 'components/Game/Mini/NoItems';
 
 export const ProfilePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,19 +37,17 @@ export const ProfilePage: React.FC = () => {
           </div>
           {loading ? (
             <h1>Loading</h1>
-          ) : (
-            userMatches && (
-              <div>
-                <Heading2 style={{ marginBottom: '2rem' }}>
-                  Game History
-                </Heading2>
-                <div className='profile__matches'>
-                  {userMatches.map((match) => (
-                    <UserMatchCard key={match._id} match={match} />
-                  ))}
-                </div>
+          ) : userMatches?.length! > 0 ? (
+            <div>
+              <Heading2 style={{ marginBottom: '2rem' }}>Game History</Heading2>
+              <div className='profile__matches'>
+                {userMatches?.map((match) => (
+                  <UserMatchCard key={match._id} match={match} />
+                ))}
               </div>
-            )
+            </div>
+          ) : (
+            <NoItems text='No matches registered' />
           )}
         </div>
       </Container>

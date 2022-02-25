@@ -1,5 +1,6 @@
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { LobbyItem } from 'components/Game/LobbyItem/LobbyItem';
+import { NoItems } from 'components/Game/Mini/NoItems';
 import { Heading1 } from 'components/Headings/Heading1/Heading1';
 import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
 import { Container } from 'components/layout/Container/Container';
@@ -12,12 +13,14 @@ import {
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LobbyStyles from './Lobby.styles';
+import { selectGetMatchesState } from '../../../features/game/game.slice';
 
 export const Lobby: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const socketContext = useContext(SocketContext);
   const matches = useAppSelector(selectMatches);
+  const { loading } = useAppSelector(selectGetMatchesState);
 
   useEffect(() => {
     socketContext?.socket?.on('created-game', (game) => {
@@ -58,9 +61,15 @@ export const Lobby: React.FC = () => {
           </div>
 
           <div className='lobby__rooms'>
-            {matches?.map((match) => (
-              <LobbyItem key={match._id} match={match} />
-            ))}
+            {loading ? (
+              <div>Loading...</div>
+            ) : matches?.length! > 0 ? (
+              matches?.map((match) => (
+                <LobbyItem key={match._id} match={match} />
+              ))
+            ) : (
+              <NoItems text='No games available' />
+            )}
           </div>
         </div>
       </Container>
