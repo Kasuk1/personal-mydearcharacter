@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const CardWaitingStyles = styled.div`
-  width: 30rem;
+  width: 20rem;
   position: relative;
-  animation: opacityLoadingFull 1.5s infinite alternate;
 
   & img {
     filter: brightness(100) invert(1);
+    opacity: 0.6;
     width: 100%;
   }
 
@@ -23,7 +23,7 @@ const CardWaitingStyles = styled.div`
 export const CardWaiting: React.FC<{ img: string }> = ({ img }) => {
   return (
     <CardWaitingStyles>
-      <img src={img} alt='' />
+      <img src={img} alt="" />
     </CardWaitingStyles>
   );
 };

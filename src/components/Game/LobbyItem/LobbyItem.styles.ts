@@ -1,16 +1,15 @@
-import styled from 'styled-components';
-import { lugia } from 'assets';
+import styled from "styled-components";
+import { lugia } from "assets";
 
 const LobbyItemStyles = styled.div`
   background: url(${lugia}), ${(props) => props.theme.cardPrimaryColor};
-  background-position: right 5% top 8%;
+  background-position: right -20% top 8%;
   background-repeat: no-repeat;
   background-size: 50%;
   border-radius: 5rem;
   box-shadow: 0.2rem 1rem 3rem rgba(0, 0, 0, 0.4);
   color: ${(props) => props.theme.cardSingleTextColor};
   padding: 1rem 3rem;
-  opacity: 0.85;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -40,7 +39,7 @@ const LobbyItemStyles = styled.div`
       flex-direction: column;
       gap: 0.5rem;
 
-      & span {
+      &--title {
         font-size: 1.4rem;
         font-weight: 800;
         text-transform: uppercase;
@@ -54,7 +53,7 @@ const LobbyItemStyles = styled.div`
         }
       }
 
-      & p {
+      &--description {
         font-size: 2rem;
 
         &.status {

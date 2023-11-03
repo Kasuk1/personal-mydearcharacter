@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const CharacterDetailStyles = styled.section`
-  background-color: ${(props) => props.theme.primaryColor};
+  //background-color: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.paragraphColor};
   padding: 0 3rem;
   padding-top: 10rem;
@@ -19,6 +19,7 @@ const CharacterDetailStyles = styled.section`
 
   .character-detail {
     &__left {
+      width: 100%;
       grid-column: 1 / -1;
 
       @media only screen and (min-width: 37.5em) {
@@ -26,7 +27,7 @@ const CharacterDetailStyles = styled.section`
       }
 
       @media only screen and (min-width: 87.5em) {
-        grid-column: 2 / 6;
+        //grid-column: 2 / 6;
       }
     }
 

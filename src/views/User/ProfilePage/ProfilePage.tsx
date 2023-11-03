@@ -1,18 +1,20 @@
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Heading1 } from 'components/Headings/Heading1/Heading1';
-import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
-import { Container } from 'components/layout/Container/Container';
-import { selectUser } from 'features/authentication/authentication.slice';
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import {
+  Container,
+  Heading1,
+  Heading2,
+  Paragraph,
+  NoItems,
+  UserMatchCard,
+} from "components";
 import {
   getMatchesByUserId,
+  selectUser,
   selectUserMatches,
-} from 'features/game/game.slice';
-import { useEffect } from 'react';
-import ProfilePageStyles from './ProfilePage.styles';
-import { selectGetMatchesByUserIdState } from '../../../features/game/game.slice';
-import { UserMatchCard } from 'components/User/UserMatchCard/UserMatchCard';
-import { Heading2 } from 'components/Headings/Heading2/Heading2';
-import { NoItems } from 'components/Game/Mini/NoItems';
+  selectGetMatchesByUserIdState,
+} from "features";
+import ProfilePageStyles from "./ProfilePage.styles";
 
 export const ProfilePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,28 +29,29 @@ export const ProfilePage: React.FC = () => {
   return (
     <ProfilePageStyles>
       <Container>
-        <div className='profile min-height-80'>
-          <div className='profile__headers'>
+        <div className="profile min-height-80">
+          <div className="profile__headers">
             <Heading1>My Profile</Heading1>
             <Paragraph>
-              In this section you can see your matches and its state during your
-              journey. Good luck!.
+              In this section you can see your profile data as well as your game
+              history.
             </Paragraph>
           </div>
-          {loading ? (
-            <h1>Loading</h1>
-          ) : userMatches?.length! > 0 ? (
-            <div>
-              <Heading2 style={{ marginBottom: '2rem' }}>Game History</Heading2>
-              <div className='profile__matches'>
+
+          <div>
+            <Heading2 style={{ marginBottom: "2rem" }}>Match History</Heading2>
+            {loading ? (
+              <h1>Loading...</h1>
+            ) : userMatches?.length! > 0 ? (
+              <div className="profile__matches">
                 {userMatches?.map((match) => (
                   <UserMatchCard key={match._id} match={match} />
                 ))}
               </div>
-            </div>
-          ) : (
-            <NoItems text='No matches registered' />
-          )}
+            ) : (
+              <NoItems text="No matches registered" />
+            )}
+          </div>
         </div>
       </Container>
     </ProfilePageStyles>

@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const HeroSectionStyles = styled.section`
-  background-color: ${(props) => props.theme.primaryColor};
+  //background-color: ${(props) => props.theme.primaryColor};
   padding: 0 3rem;
   padding-top: 7rem;
+  padding-bottom: 5rem;
   transition: all 0.2s;
 
   @media only screen and (min-width: 87.5em) {
@@ -18,23 +19,37 @@ const HeroSectionStyles = styled.section`
     &--left {
       width: 100%;
       height: 100%;
-      grid-column: 1 / 9;
+      grid-column: 1 / 8;
       grid-row: 1 / 2;
       z-index: 10;
-      padding: 7rem 0;
+      padding: 11vw 0;
 
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       gap: 1.8rem;
 
+      @media only screen and (min-width: 27.5em) {
+        padding: 15vw 0;
+      }
+
       @media only screen and (min-width: 37.5em) {
-        grid-column: 2 / 8;
+        grid-column: 2 / 9;
         padding: 14vw 0;
       }
 
+      @media only screen and (min-width: 57.5em) {
+        grid-column: 2 / 8;
+        padding: 18rem 0;
+      }
+
       @media only screen and (min-width: 87.5em) {
-        padding: 14rem 0;
+        padding: 20rem 0;
+      }
+
+      @media only screen and (min-width: 112.5em) {
+        padding: 30rem 0;
       }
     }
 
@@ -50,22 +65,38 @@ const HeroSectionStyles = styled.section`
       }
 
       @media only screen and (min-width: 37.5em) {
+        grid-column: 5 / -1;
+      }
+
+      @media only screen and (min-width: 57.5em) {
         grid-column: 4 / 12;
       }
 
       @media only screen and (min-width: 87.5em) {
-        grid-column: 5 / 12;
       }
     }
 
     &__title {
       color: ${(props) => props.theme.headerColor};
-      font-size: 6.1vw;
-      line-height: 7vw;
+      font-family: "Advent Pro", sans-serif;
+      font-size: 9.5vw;
+      line-height: 8vw;
       font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px black;
 
       @media only screen and (min-width: 37.5em) {
-        line-height: 6vw;
+        //line-height: 6rem;
+      }
+
+      @media only screen and (min-width: 57.5em) {
+        line-height: 8rem;
+        font-size: 8rem;
+      }
+
+      @media only screen and (min-width: 87.5em) {
+        line-height: 10rem;
+        font-size: 11rem;
       }
 
       @media only screen and (min-width: 112.5em) {
@@ -76,6 +107,7 @@ const HeroSectionStyles = styled.section`
 
     &__actions {
       display: flex;
+      align-items: flex-start;
       flex-direction: column;
       gap: 1.5rem;
 
@@ -122,8 +154,13 @@ const HeroSectionStyles = styled.section`
       }
 
       &::before {
-        content: '';
-        background-color: ${(props) => props.theme.secondaryColor};
+        content: "";
+        background: linear-gradient(
+          90deg,
+          hsla(0, 0%, 0%, 1) 0%,
+          hsla(30, 6%, 7%, 1) 7%,
+          hsla(44, 30%, 88%, 1) 100%
+        );
         border-radius: 50%;
         width: 70%;
         height: 70%;
@@ -131,11 +168,7 @@ const HeroSectionStyles = styled.section`
         bottom: 18%;
         right: 0;
         z-index: -1;
-        transition: all 0.2s;
-      }
-
-      &:hover::before {
-        transform: scale(0.95);
+        animation: 2.5s ease-in infinite alternate pulse;
       }
     }
   }

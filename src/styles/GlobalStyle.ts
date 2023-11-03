@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     *,
     *::after,
     *::before {
@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
 
     @keyframes opacityLoading {
         from {
-            opacity: 0.5;
+            opacity: 0.75;
         }
         to {
             opacity: 1;
@@ -64,6 +64,66 @@ const GlobalStyle = createGlobalStyle`
         }
         100% {
           left: 110%;
+        }
+    }
+
+    @keyframes topToBottomPlayer1Pointer {
+        0% {
+            top: 10rem;
+            transform: rotateY(0);
+        }
+        100% {
+            top: 12.5rem;
+            transform: rotateY(360deg);
+        }
+    }
+
+    @keyframes bottomToTopPlayer2Pointer {
+        0% {
+            bottom: 10rem;
+            transform: rotateY(0);
+        }
+        100% {
+            bottom: 12.5rem;
+            transform: rotateY(360deg);
+        }
+    }
+
+    @keyframes rotateYaxis {
+        0% {
+            transform: rotateY(0);
+        }
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.95);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes pulsePlayButton  {
+        0% {
+            opacity: 0.85;
+            transform: scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes rotateSquare {
+        0% {
+            transform: rotate(0);
+        }
+        100% {
+            transform: rotate(360deg);
         }
     }
 
@@ -90,5 +150,3 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
     }
 `;
-
-export default GlobalStyle;

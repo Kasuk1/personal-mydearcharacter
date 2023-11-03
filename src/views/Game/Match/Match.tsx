@@ -1,22 +1,31 @@
-import { useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from 'app/hooks';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUserAstronaut,
-  faUserNinja,
-} from '@fortawesome/free-solid-svg-icons';
-import { Container } from 'components/layout/Container/Container';
-import { SocketContext } from 'context/SocketContext';
-import MatchStyles from './Match.styles';
-import { selectUser } from 'features/authentication/authentication.slice';
-import { selectActiveMatch } from 'features/game/game.slice';
-import { MatchCard } from 'components/Game/MatchCard/MatchCard';
-import { MatchCardHidden } from 'components/Game/MatchCardHidden/MatchCardHidden';
-import { ProgressBar } from 'components/Game/Mini/ProgressBar';
-import { CardsSelected } from '../../../components/Game/CardsSelected/CardsSelected';
+  faHandPointDown,
+  faHandPointer,
+  faPlay,
+} from "@fortawesome/free-solid-svg-icons";
+import { SocketContext } from "context";
+import { selectActiveMatch, selectUser } from "features";
+import {
+  ButtonMatchAction,
+  CardsSelected,
+  Container,
+  MatchCard,
+  MatchCardHidden,
+  MatchType,
+  PlayerInfo,
+  PlayerInfoWaiting,
+  ProgressBar,
+} from "components";
+import { acetrainerGen3, acetrainerGen4 } from "assets";
+
+import MatchStyles from "./Match.styles";
 
 export const Match: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { gameId } = useParams();
   const { uid } = useAppSelector(selectUser);
@@ -24,28 +33,31 @@ export const Match: React.FC = () => {
   const socketContext = useContext(SocketContext);
 
   const handleCancelGame = () => {
-    socketContext?.socket?.emit('cancel-game', gameId);
-    navigate('/game');
+    socketContext?.socket?.emit("cancel-game", gameId);
+    navigate("/game");
   };
 
   const handlePlayGame = () => {
-    socketContext?.socket?.emit('play-game', gameId);
+    socketContext?.socket?.emit("play-game", gameId);
   };
 
   useEffect(() => {
-    socketContext?.socket?.on('canceled-game', () => {
-      navigate('/game');
+    socketContext?.socket?.on("canceled-game", () => {
+      navigate("/game");
     });
   }, [socketContext, navigate]);
 
   useEffect(() => {
+    let finishGameTimer: NodeJS.Timeout;
+
     if (activeMatch?.healthPlayer1! <= 0 || activeMatch?.healthPlayer2! <= 0) {
-      setTimeout(() => {
-        socketContext?.socket?.emit('finish-game', gameId);
-        navigate('/profile');
+      finishGameTimer = setTimeout(() => {
+        socketContext?.socket?.emit("finish-game", gameId);
+        navigate("/profile");
       }, 4000);
     }
-  }, [socketContext?.socket, navigate, activeMatch, gameId, uid]);
+    return () => clearTimeout(finishGameTimer);
+  }, [socketContext?.socket, navigate, activeMatch, gameId, dispatch]);
 
   /*  useEffect(() => {
     return () => {
@@ -57,106 +69,152 @@ export const Match: React.FC = () => {
   return (
     <MatchStyles>
       <Container>
-        <div className='match min-height-70'>
-          <div className='match__headers'>
-            <h1>{activeMatch?.player1.nickname}'s Room</h1>
+        <div className="match min-height-70">
+          <div className="match__headers">
+            <div className="match__headers--info">
+              <h1>Classic Match</h1>
+              <MatchType text="1v1" />
+            </div>
+
             {activeMatch?.player1?.uid === uid && (
-              <button type='button' onClick={handleCancelGame}>
-                Leave Room
-              </button>
-            )}
-          </div>
-          {activeMatch?.player1 && (
-            <h2 className='match__player'>
-              <FontAwesomeIcon icon={faUserAstronaut} />{' '}
-              {activeMatch?.player1.nickname}'s Deck
-              <ProgressBar
-                basis={activeMatch?.player1?.level * 3000}
-                health={activeMatch?.healthPlayer1}
+              <ButtonMatchAction
+                text="Leave Room"
+                colorMode="cancel"
+                onButtonAction={handleCancelGame}
               />
-            </h2>
-          )}
-          <div className='match__deck'>
-            {activeMatch?.player1?.uid === uid
-              ? activeMatch?.deckPlayer1?.map((card) => (
-                  <MatchCard key={card._id} card={card} />
-                ))
-              : activeMatch?.deckPlayer1?.map((card) => (
-                  <MatchCardHidden key={card._id} img={card.image} />
-                ))}
+            )}
+          </div>
+          <div className="match__info player1">
+            {activeMatch?.status === "playing" && activeMatch?.player1 && (
+              <>
+                <div className="match__player">
+                  <img src={acetrainerGen4} alt="" />
+                  <div>
+                    <h2>{activeMatch?.player1.nickname}</h2>
+                    <ProgressBar
+                      basis={activeMatch?.player1?.level * 3000}
+                      health={activeMatch?.healthPlayer1}
+                    />
+                  </div>
+                  {activeMatch?.status === "playing" &&
+                    activeMatch?.turns % 2 !== 0 &&
+                    activeMatch?.cardsSelected.length !== 2 &&
+                    activeMatch?.healthPlayer1 > 0 &&
+                    activeMatch?.healthPlayer2 > 0 && (
+                      <div className="match__pointer--player1">
+                        <FontAwesomeIcon icon={faHandPointer} />
+                      </div>
+                    )}
+                </div>
+                <div className="match__deck">
+                  {activeMatch?.player1?.uid === uid
+                    ? activeMatch?.deckPlayer1?.map((card) => (
+                        <MatchCard key={card._id} card={card} />
+                      ))
+                    : activeMatch?.deckPlayer1?.map((card) => (
+                        <MatchCardHidden key={card._id} img={card.image} />
+                      ))}
+                </div>
+              </>
+            )}
           </div>
 
-          <div className='match__state'>
-            {activeMatch?.status === 'waiting' && (
-              <span className='match__state-message'>
-                Waiting for another player...
-              </span>
-            )}
-            {activeMatch?.status === 'full' && (
-              <span className='match__state-message'>
-                Waiting for player 1 to start...
-              </span>
-            )}
-            {activeMatch?.status === 'playing' &&
-              activeMatch?.turns % 2 !== 0 &&
-              activeMatch?.cardsSelected.length !== 2 &&
-              activeMatch?.healthPlayer1 > 0 &&
-              activeMatch?.healthPlayer2 > 0 && (
-                <span className='match__state-message'>
-                  Is your turn {activeMatch?.player1.nickname}!
-                </span>
-              )}
-            {activeMatch?.status === 'playing' &&
-              activeMatch?.turns % 2 === 0 &&
-              activeMatch?.cardsSelected.length !== 2 &&
-              activeMatch?.healthPlayer2 > 0 &&
-              activeMatch?.healthPlayer1 > 0 && (
-                <span className='match__state-message'>
-                  Is your turn {activeMatch.player2?.nickname}!
-                </span>
-              )}
-            {activeMatch?.healthPlayer1! <= 0 && (
-              <span className='match__state-message'>
-                {activeMatch?.player2?.nickname} WINS!
-              </span>
-            )}
-            {activeMatch?.healthPlayer2! <= 0 && (
-              <span className='match__state-message'>
-                {activeMatch?.player1?.nickname} WINS!
-              </span>
+          <div className="match__state">
+            {/* WAITING FOR SECOND PLAYER */}
+            {(activeMatch?.status === "waiting" ||
+              activeMatch?.status === "full") && (
+              <div className="match__state--waiting-box">
+                {activeMatch?.player1 ? (
+                  <PlayerInfo
+                    imgSrc={acetrainerGen4}
+                    text={activeMatch.player1.nickname}
+                  />
+                ) : (
+                  <PlayerInfoWaiting />
+                )}
+
+                {activeMatch?.status === "full" ? (
+                  activeMatch?.player1?.uid === uid && (
+                    <button
+                      className="match__state-play"
+                      type="button"
+                      onClick={handlePlayGame}
+                    >
+                      <FontAwesomeIcon icon={faPlay} />
+                    </button>
+                  )
+                ) : (
+                  <span className="match__state--waiting-vs">vs</span>
+                )}
+
+                {activeMatch.player2 ? (
+                  <PlayerInfo
+                    imgSrc={acetrainerGen3}
+                    text={activeMatch.player2.nickname}
+                  />
+                ) : (
+                  <PlayerInfoWaiting />
+                )}
+              </div>
             )}
 
-            {activeMatch?.status === 'full' &&
-              activeMatch?.player1?.uid === uid && (
-                <button
-                  className='match__state-play'
-                  type='button'
-                  onClick={handlePlayGame}
-                >
-                  Play
-                </button>
-              )}
-            <CardsSelected />
+            {/* WINNER PLAYER */}
+            {activeMatch?.status === "playing" && (
+              <>
+                {activeMatch?.healthPlayer1! <= 0 && (
+                  <PlayerInfo
+                    text={`${activeMatch?.player2?.nickname} WINS!`}
+                    imgSrc={acetrainerGen4}
+                  />
+                )}
+                {activeMatch?.healthPlayer2! <= 0 && (
+                  <PlayerInfo
+                    text={`${activeMatch?.player1?.nickname} WINS!`}
+                    imgSrc={acetrainerGen4}
+                  />
+                )}
+              </>
+            )}
+
+            {/* PLAYERS CARD SELECTED */}
+            {activeMatch?.status === "playing" &&
+              activeMatch?.healthPlayer1! > 0 &&
+              activeMatch?.healthPlayer2! > 0 && <CardsSelected />}
           </div>
 
-          {activeMatch?.player2 && (
-            <h2 className='match__player' style={{ alignSelf: 'flex-end' }}>
-              <FontAwesomeIcon icon={faUserNinja} />{' '}
-              {activeMatch?.player2.nickname}'s Deck
-              <ProgressBar
-                basis={activeMatch?.player2?.level * 3000}
-                health={activeMatch?.healthPlayer2}
-              />
-            </h2>
-          )}
-          <div className='match__deck'>
-            {activeMatch?.player2?.uid === uid
-              ? activeMatch?.deckPlayer2?.map((card) => (
-                  <MatchCard key={card._id} card={card} />
-                ))
-              : activeMatch?.deckPlayer2?.map((card) => (
-                  <MatchCardHidden key={card._id} img={card.image} />
-                ))}
+          <div className="match__info player2">
+            {activeMatch?.status === "playing" && activeMatch?.player2 && (
+              <>
+                <div className="match__player">
+                  <img src={acetrainerGen3} alt="" />
+                  <div>
+                    <h2>{activeMatch?.player2.nickname}</h2>
+                    <ProgressBar
+                      basis={activeMatch?.player2?.level * 3000}
+                      health={activeMatch?.healthPlayer2}
+                    />
+                  </div>
+                  {activeMatch?.status === "playing" &&
+                    activeMatch?.turns % 2 === 0 &&
+                    activeMatch?.cardsSelected.length !== 2 &&
+                    activeMatch?.healthPlayer2 > 0 &&
+                    activeMatch?.healthPlayer1 > 0 && (
+                      <div className="match__pointer--player2">
+                        <FontAwesomeIcon icon={faHandPointDown} />
+                      </div>
+                    )}
+                </div>
+                <div className="match__deck">
+                  {activeMatch?.player2?.uid === uid
+                    ? activeMatch?.deckPlayer2?.map((card) => (
+                        <MatchCard key={card._id} card={card} />
+                      ))
+                    : activeMatch?.deckPlayer2?.map((card) => (
+                        <MatchCardHidden key={card._id} img={card.image} />
+                      ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Container>

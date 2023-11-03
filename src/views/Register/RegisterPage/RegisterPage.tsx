@@ -1,17 +1,13 @@
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-
-import { Container } from 'components/layout/Container/Container';
-import { ButtonSubmit } from 'components/Buttons/ButtonSubmit/ButtonSubmit';
-import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
-import { Heading2 } from 'components/Headings/Heading2/Heading2';
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { Container, Heading2, ButtonSubmit, Paragraph } from "components";
 
 import {
   register,
   selectRegisterForm,
   setAuthenticationForm,
-} from 'features/authentication/authentication.slice';
-import { rickAndMortyPortal } from 'assets';
-import RegisterStyles from './RegisterPage.styles';
+} from "features/authentication/authentication.slice";
+import { rickAndMortyPortal } from "assets";
+import RegisterStyles from "./RegisterPage.styles";
 
 export const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +16,7 @@ export const RegisterPage = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
       setAuthenticationForm({
-        formName: 'registerForm',
+        formName: "registerForm",
         name: e.target.name,
         value: e.target.value,
       })
@@ -33,14 +29,14 @@ export const RegisterPage = () => {
   };
 
   return (
-    <RegisterStyles className='min-height-85'>
+    <RegisterStyles className="min-height-85">
       <Container>
-        <div className='register-page__left'>
-          <img src={rickAndMortyPortal} alt='' />
+        <div className="register-page__left">
+          <img src={rickAndMortyPortal} alt="" />
         </div>
-        <div className='register-page__right'>
-          <form className='register-form' onSubmit={handleSubmit}>
-            <div className='register-form__header'>
+        <div className="register-page__right">
+          <form className="register-form" onSubmit={handleSubmit}>
+            <div className="register-form__header">
               <Heading2>Register</Heading2>
               <Paragraph>
                 Complete all the fields below to register successfully.
@@ -48,30 +44,30 @@ export const RegisterPage = () => {
             </div>
 
             <input
-              className='register-form__input'
-              type='text'
-              name='nickname'
+              className="register-form__input"
+              type="text"
+              name="nickname"
               value={nickname}
-              placeholder='Nickname'
+              placeholder="Nickname"
               onChange={handleChange}
             />
             <input
-              className='register-form__input'
-              type='email'
-              name='email'
+              className="register-form__input"
+              type="email"
+              name="email"
               value={email}
-              placeholder='Email'
+              placeholder="Email"
               onChange={handleChange}
             />
             <input
-              className='register-form__input'
-              type='password'
-              name='password'
+              className="register-form__input"
+              type="password"
+              name="password"
               value={password}
-              placeholder='Password'
+              placeholder="Password"
               onChange={handleChange}
             />
-            <ButtonSubmit text='Register now!' />
+            <ButtonSubmit text="Register now!" />
           </form>
         </div>
       </Container>

@@ -1,19 +1,20 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const MatchCardStyles = styled.div`
   background-color: ${(props) => props.theme.cardPrimaryColor};
   border-radius: 0.9rem;
   cursor: pointer;
-  padding: 1.5rem 2rem 1rem;
-  width: 20rem;
-  min-width: 20rem;
+  padding: 0.6rem 1.2rem;
+  width: 11.5rem;
+
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  transition: all 0.2s;
+  gap: 1.5rem;
+  transition: all 0.2s ease-in;
 
   &:hover {
-    transform: translateY(-2%);
+    transform: scale(1.6);
+    z-index: 2;
   }
 
   .match-card {
@@ -26,27 +27,36 @@ const MatchCardStyles = styled.div`
     }
 
     &__level {
-      background-color: ${(props) => props.theme.cardSingleTextColor};
-      border-radius: 5rem;
-      color: ${(props) => props.theme.cardPrimaryColor};
-      font-size: 1.6rem;
-      font-weight: 600;
-      padding: 0.1rem 2rem;
       position: absolute;
-      bottom: -1.5rem;
+      bottom: 0;
       right: 0;
+      background-color: ${(props) => props.theme.cardSecondaryColor};
+      color: ${(props) => props.theme.cardSingleTextColor};
+      font-size: 1rem;
+      font-weight: 600;
+      clip-path: circle();
+      padding: 1rem;
     }
 
     &__info {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
+    }
+
+    &__statistics {
+      display: flex;
+      justify-content: space-between;
+
+      & p {
+        font-size: 2rem;
+      }
     }
 
     &__wrapper {
       & span {
-        color: ${(props) => props.theme.cardSingleTextColor};
-        font-size: 1rem;
+        color: ${(props) => props.theme.paragraphColor};
+        font-size: 0.7rem;
         font-weight: 800;
         text-transform: uppercase;
       }
@@ -55,18 +65,9 @@ const MatchCardStyles = styled.div`
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        color: ${(props) => props.theme.cardSingleTextColor};
-        font-size: 1.7rem;
+        color: ${(props) => props.theme.paragraphColor};
+        font-size: 1rem;
         text-transform: uppercase;
-      }
-    }
-
-    &__statistics {
-      display: flex;
-      justify-content: space-between;
-
-      & p {
-        font-size: 2.5rem;
       }
     }
   }

@@ -1,40 +1,43 @@
-
 export const darkTheme = {
-    primaryColor: '#31213A',
-    secondaryColor: '#442D50',
-    tertiaryColor: '#E0BB71',
+  primaryColor: "#000000ff",
+  secondaryColor: "#010918",
+  tertiaryColor: "#D2DCEE",
 
-    headerColor: '#E0BB71',
-    paragraphColor: '#EDE6F9',
+  headerColor: "#E9E4D6",
+  paragraphColor: "#D2DCEE",
 
-    cardPrimaryColor: '#EDE6F9',
-    cardSecondaryColor: '#605678',
-    cardTextColor: '#F6F3FC',
-    cardSingleTextColor: '#4C4361',
-    cardExtraLoadingColor: '#4C4361',
+  cardPrimaryColor: "rgba(5, 45, 79, 0.6)",
+  cardSecondaryColor: "rgba(0, 0, 0, 0.4)",
+  cardTextColor: "#F6F3FC",
+  cardSingleTextColor: "#BFCADF",
+  cardExtraLoadingColor: "rgba(1, 9, 24, 1)",
+  cardExtraLoadingColor2: "rgba(0, 0, 0, 0.6)",
+  cardExtraLoadingColor3: "rgba(0, 0, 0, 0.3)",
 
-    buttonPrimaryBackgroundColor: '#442D50',
-    buttonPrimaryTextColor: '#EDE6F9',
-    buttonPrimaryBackgroundColorHover: '#EDE6F9',
-    buttonPrimaryTextColorHover: '#15212B'
-}
+  buttonPrimaryBackgroundColor: "rgba(5, 45, 79, 0.6)",
+  buttonPrimaryBackgroundColorHover: "#052D4F",
+  buttonPrimaryTextColor: "#EDE6F9",
+  buttonPrimaryTextColorHover: "#EDE6F9",
+};
 
 export const lightTheme = {
-    primaryColor: '#EDE6F9',
-    secondaryColor: '#442D50',
-    tertiaryColor: '#E0BB71',
+  primaryColor: "#EDE6F9",
+  secondaryColor: "#CECECE",
+  tertiaryColor: "#E0BB71",
 
-    headerColor: '#E0BB71',
-    paragraphColor: '#21313C',
+  headerColor: "#071B42",
+  paragraphColor: "#071B42",
 
-    cardPrimaryColor: '#4C4361',
-    cardSecondaryColor: '#605678',
-    cardTextColor: '#F6F3FC',
-    cardSingleTextColor: '#F6F3FC',
-    cardExtraLoadingColor: '#4C4361',
+  cardPrimaryColor: "rgba(184, 184, 184, 1)",
+  cardSecondaryColor: "rgba(0, 0, 0, 0.4)",
+  cardTextColor: "#494B4E",
+  cardSingleTextColor: "#494B4E",
+  cardExtraLoadingColor: "rgba(1, 9, 24, 1)",
+  cardExtraLoadingColor2: "rgba(0, 0, 0, 0.6)",
+  cardExtraLoadingColor3: "rgba(0, 0, 0, 0.3)",
 
-    buttonPrimaryBackgroundColor: '#442D50',
-    buttonPrimaryTextColor: '#EDE6F9',
-    buttonPrimaryBackgroundColorHover: '#31213A',
-    buttonPrimaryTextColorHover: '#EDE6F9'
-}
+  buttonPrimaryBackgroundColor: "rgba(155, 155, 155, 0.7)",
+  buttonPrimaryBackgroundColorHover: "rgba(155, 155, 155, 1)",
+  buttonPrimaryTextColor: "#545454",
+  buttonPrimaryTextColorHover: "#333333",
+};

@@ -1,18 +1,13 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-
-import { CardDetail } from '../../../components/CharacterCard/CardDetail/CardDetail';
-import { Container } from '../../../components/layout/Container/Container';
-import { CardDetailLoading } from '../../../components/CharacterCard/CardDetail/CardDetailLoading';
-
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { Container, CardDetail, CardDetailLoading } from "components";
 import {
   getCharacterDetail,
   selectCharacter,
   selectGetCharacterDetailLoading,
-} from '../../../features/character/character.slice';
-
-import CharacterDetailStyles from './CharacterDetail.styles';
+} from "features";
+import CharacterDetailStyles from "./CharacterDetail.styles";
 
 export const CharacterDetail: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -26,16 +21,16 @@ export const CharacterDetail: React.FC = () => {
   }, [dispatch, characterId]);
 
   return (
-    <CharacterDetailStyles className='min-height-85'>
+    <CharacterDetailStyles className="min-height-85">
       <Container>
-        <div className='character-detail__left'>
+        <div className="character-detail__left">
           {characterLoading ? (
             <CardDetailLoading />
           ) : (
             character && <CardDetail {...character} />
           )}
         </div>
-        <div className='character-detail__right'></div>
+        {/* <div className="character-detail__right"></div> */}
       </Container>
     </CharacterDetailStyles>
   );

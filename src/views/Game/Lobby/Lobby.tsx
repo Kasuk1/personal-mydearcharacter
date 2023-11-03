@@ -1,19 +1,22 @@
-import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { LobbyItem } from 'components/Game/LobbyItem/LobbyItem';
-import { NoItems } from 'components/Game/Mini/NoItems';
-import { Heading1 } from 'components/Headings/Heading1/Heading1';
-import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
-import { Container } from 'components/layout/Container/Container';
-import { SocketContext } from 'context/SocketContext';
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "app/hooks";
+import {
+  ButtonMatchAction,
+  Container,
+  Heading1,
+  LobbyItem,
+  NoItems,
+  Paragraph,
+} from "components";
+import { SocketContext } from "context";
 import {
   getMatches,
   selectMatches,
   setActiveMatch,
-} from 'features/game/game.slice';
-import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import LobbyStyles from './Lobby.styles';
-import { selectGetMatchesState } from '../../../features/game/game.slice';
+  selectGetMatchesState,
+} from "features";
+import LobbyStyles from "./Lobby.styles";
 
 export const Lobby: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ export const Lobby: React.FC = () => {
   const { loading } = useAppSelector(selectGetMatchesState);
 
   useEffect(() => {
-    socketContext?.socket?.on('created-game', (game) => {
+    socketContext?.socket?.on("created-game", (game) => {
       dispatch(setActiveMatch(game));
       navigate(`/game/${game._id}`);
     });
@@ -34,20 +37,20 @@ export const Lobby: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    socketContext?.socket?.on('joined-game', (game) => {
+    socketContext?.socket?.on("joined-game", (game) => {
       navigate(`/game/${game._id}`);
     });
   }, [socketContext?.socket, navigate]);
 
   const handleCreateRoom = () => {
-    socketContext?.socket?.emit('create-game');
+    socketContext?.socket?.emit("create-game");
   };
 
   return (
     <LobbyStyles>
       <Container>
-        <div className='lobby min-height-80'>
-          <div className='lobby__header'>
+        <div className="lobby min-height-80">
+          <div className="lobby__header">
             <div>
               <Heading1>Lobby</Heading1>
               <Paragraph>
@@ -55,12 +58,15 @@ export const Lobby: React.FC = () => {
                 room have a waiting state.
               </Paragraph>
             </div>
-            <button type='button' onClick={handleCreateRoom}>
-              Create room
-            </button>
+
+            <ButtonMatchAction
+              text="Create room"
+              colorMode="submit"
+              onButtonAction={handleCreateRoom}
+            />
           </div>
 
-          <div className='lobby__rooms'>
+          <div className="lobby__rooms">
             {loading ? (
               <div>Loading...</div>
             ) : matches?.length! > 0 ? (
@@ -68,7 +74,7 @@ export const Lobby: React.FC = () => {
                 <LobbyItem key={match._id} match={match} />
               ))
             ) : (
-              <NoItems text='No games available' />
+              <NoItems text="No matches available" />
             )}
           </div>
         </div>

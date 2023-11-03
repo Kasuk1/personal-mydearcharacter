@@ -1,12 +1,12 @@
-import { useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import CardsSelectedStyles from './CardsSelected.styles';
-import { useAppSelector } from '../../../app/hooks';
-import { selectActiveMatch } from '../../../features/game/game.slice';
-import { SocketContext } from 'context/SocketContext';
-import { selectUser } from 'features/authentication/authentication.slice';
-import { CardWaiting } from '../Mini/CardWaiting';
-import { lugia, mewto } from 'assets';
+import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import CardsSelectedStyles from "./CardsSelected.styles";
+import { useAppSelector } from "../../../app/hooks";
+import { selectActiveMatch } from "../../../features/game/game.slice";
+import { SocketContext } from "context";
+import { selectUser } from "features/authentication/authentication.slice";
+import { CardWaiting } from "../Mini/CardWaiting";
+import { lugia, mewto } from "assets";
 
 export const CardsSelected = () => {
   const { gameId } = useParams();
@@ -23,7 +23,7 @@ export const CardsSelected = () => {
     ) {
       setTimeout(() => {
         socketContext?.socket?.emit(
-          'battle-card',
+          "battle-card",
           activeMatch?.cardsSelected,
           gameId
         );
@@ -40,17 +40,16 @@ export const CardsSelected = () => {
   return (
     <CardsSelectedStyles>
       {card1 ? (
-        <div className='card-selected'>
-          <div className='card-selected__header'>
-            <img src={card1.image} alt='' />
-            <span className='card-selected__level'>
-              Lvl.{' '}
-              {activeMatch?.cardsSelected.length === 2 ? card1.level : '???'}
+        <div className="card-selected">
+          <div className="card-selected__header">
+            <img src={card1.image} alt="" />
+            <span className="card-selected__level">
+              {activeMatch?.cardsSelected.length === 2 ? card1.level : "???"}
             </span>
           </div>
 
-          <div className='card-selected__info'>
-            <div className='card-selected__wrapper'>
+          <div className="card-selected__info">
+            <div className="card-selected__wrapper">
               <span>{card1.anime}</span>
               <p>{card1.name}</p>
             </div>
@@ -60,22 +59,19 @@ export const CardsSelected = () => {
         <CardWaiting img={mewto} />
       )}
 
-      {activeMatch?.cardsSelected.length === 2 && (
-        <span className='card-selected__vs'>vs</span>
-      )}
+      <span className="card-selected__vs">vs</span>
 
       {card2 ? (
-        <div className='card-selected'>
-          <div className='card-selected__header'>
-            <img src={card2.image} alt='' />
-            <span className='card-selected__level'>
-              Lvl.{' '}
-              {activeMatch?.cardsSelected.length === 2 ? card2.level : '???'}
+        <div className="card-selected">
+          <div className="card-selected__header">
+            <img src={card2.image} alt="" />
+            <span className="card-selected__level">
+              {activeMatch?.cardsSelected.length === 2 ? card2.level : "???"}
             </span>
           </div>
 
-          <div className='card-selected__info'>
-            <div className='card-selected__wrapper'>
+          <div className="card-selected__info">
+            <div className="card-selected__wrapper">
               <span>{card2.anime}</span>
               <p>{card2.name}</p>
             </div>

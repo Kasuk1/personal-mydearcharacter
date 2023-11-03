@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ProfilePageStyles = styled.section`
-  background-color: ${(props) => props.theme.primaryColor};
+  //background-color: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.paragraphColor};
   padding: 0 3rem;
   padding-top: 10rem;

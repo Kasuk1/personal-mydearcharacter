@@ -1,38 +1,35 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { ButtonPrimary } from 'components/Buttons/ButtonPrimary/ButtonPrimary';
-import { CardDetail } from 'components/CharacterCard/CardDetail/CardDetail';
-import { Heading2 } from 'components/Headings/Heading2/Heading2';
-import { Paragraph } from 'components/Headings/Paragraph/Paragraph';
-import { Container } from 'components/layout/Container/Container';
-
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import {
-  getRandomCharacters,
-  selectGetRandomCharacters,
-} from 'features/layout/layout.slice';
-
-import StoreSectionStyles from './StoreSection.styles';
+  ButtonPrimary,
+  CardDetail,
+  Container,
+  Heading2,
+  Paragraph,
+} from "components";
+import { getRandomCharacters, selectGetRandomCharacters } from "features";
+import StoreSectionStyles from "./StoreSection.styles";
 
 export const StoreSection = () => {
   const dispatch = useAppDispatch();
   const { randomCharacters } = useAppSelector(selectGetRandomCharacters);
 
   useEffect(() => {
-    dispatch(getRandomCharacters());
+    dispatch(getRandomCharacters(1));
   }, [dispatch]);
 
   return (
     <StoreSectionStyles>
       <Container>
-        <div className='store-section--left'>
+        <div className="store-section--left">
           <Heading2>Train and level up the power of your characters</Heading2>
           <Paragraph
-            text='See and filter the characters that you could have.'
-            style={{ marginBottom: '3rem' }}
+            text="See and filter the characters that you could have."
+            style={{ marginBottom: "3rem" }}
           />
-          <ButtonPrimary path='/characters' text='See characters' />
+          <ButtonPrimary path="/characters" text="See characters" />
         </div>
-        <div className='store-section--right'>
+        <div className="store-section--right">
           {randomCharacters.map((character) => (
             <CardDetail key={character.id} {...character} />
           ))}

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const MatchStyles = styled.section`
-  background-color: ${(props) => props.theme.primaryColor};
+  //background-color: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.paragraphColor};
   padding: 0 3rem;
   padding-top: 15rem;
@@ -14,69 +14,110 @@ const MatchStyles = styled.section`
     flex-direction: column;
     gap: 2rem;
 
+    @media only screen and (min-width: 37.5em) {
+      grid-column: 2 / 12;
+    }
+
+    @media only screen and (min-width: 87.5em) {
+      //grid-column: 2 / 6;
+    }
+
     &__headers {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
       flex-wrap: wrap;
 
-      & h1 {
-        font-size: 5rem;
+      @media only screen and (min-width: 37.5em) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &--info {
+        display: flex;
+        flex-direction: column;
+
+        & h1 {
+          font-size: 4rem;
+        }
       }
 
       & button {
-        background-color: ${(props) =>
-          props.theme.buttonPrimaryBackgroundColor};
-        border: none;
-        border-radius: 5rem;
-        color: ${(props) => props.theme.buttonPrimaryTextColor};
-        cursor: pointer;
-        font-size: 1.5rem;
-        font-weight: 500;
-        font-family: inherit;
-        min-width: 14rem;
-        padding: 1.2rem 0;
-        transition: all 0.2s;
+        align-self: flex-end;
 
-        &:hover {
-          background-color: #cc0000;
-          color: #fff;
-          transform: translateY(-10%);
+        @media only screen and (min-width: 37.5em) {
+          align-self: flex-start;
         }
+      }
+    }
+
+    &__info {
+      display: flex;
+      gap: 1rem;
+
+      @media only screen and (min-width: 37.5em) {
+        flex-direction: row;
+      }
+
+      &.player1 {
+        flex-direction: column-reverse;
+      }
+
+      &.player2 {
+        flex-direction: column;
+        align-items: flex-end;
       }
     }
 
     &__player {
-      display: inline-block;
-      background-color: ${(props) => props.theme.buttonPrimaryBackgroundColor};
-      border-radius: 5rem;
-      color: ${(props) => props.theme.tertiaryColor};
-      padding: 0.8rem 3rem 1.5rem;
-      font-size: 2.5rem;
-      position: relative;
-      top: 5rem;
+      //background-color: ${(props) => props.theme.cardExtraLoadingColor3};
+      //padding: 1rem 3rem 1rem 6.5rem;
       z-index: 2;
-      align-self: flex-start;
-      width: 35%;
-      min-width: 30rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      & h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      & img {
+        width: 9rem;
+        margin-right: -2rem;
+        top: 0;
+      }
+    }
+
+    &__pointer {
+      &--player1 {
+        position: absolute;
+        left: 2.5rem;
+        font-size: 3.5rem;
+        animation-name: topToBottomPlayer1Pointer, rotateYaxis;
+        animation-duration: 0.8s, 2.5s;
+        animation-iteration-count: infinite, infinite;
+        animation-direction: alternate, reverse;
+      }
+
+      &--player2 {
+        position: absolute;
+        right: 2.5rem;
+        font-size: 3.5rem;
+        animation-name: bottomToTopPlayer2Pointer, rotateYaxis;
+        animation-duration: 0.8s, 2.5s;
+        animation-iteration-count: infinite, infinite;
+        animation-direction: alternate, reverse;
+      }
     }
 
     &__deck {
-      overflow-x: auto;
-      padding: 1.2rem;
       display: flex;
-      gap: 0.6rem;
-
-      &::-webkit-scrollbar {
-        height: 1rem;
-
-        &-track {
-          background: ${(props) => props.theme.secondaryColor};
-        }
-        &-thumb {
-          background: ${(props) => props.theme.tertiaryColor};
-        }
-      }
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     &__state {
@@ -87,32 +128,52 @@ const MatchStyles = styled.section`
       gap: 2rem;
       overflow: hidden;
 
-      &-message {
-        align-self: flex-start;
-        background-color: ${(props) => props.theme.cardPrimaryColor};
-        border-radius: 0.2rem;
-        color: ${(props) => props.theme.primaryColor};
-        font-size: 3rem;
-        padding: 0.2rem 2.5rem;
-        position: relative;
-        animation: leftToRight 12s linear infinite;
+      &--waiting {
+        &-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2.5rem;
+
+          @media only screen and (min-width: 37.5em) {
+            flex-direction: row;
+          }
+        }
+        &-vs {
+          font-size: 2.5rem;
+          font-style: italic;
+        }
       }
 
       &-play {
-        background-color: #b1dc2e;
+        background: linear-gradient(
+          90deg,
+          hsla(145, 45%, 23%, 1) 0%,
+          hsla(150, 100%, 41%, 1) 100%
+        );
+        box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.25);
         border: none;
         border-radius: 50%;
         cursor: pointer;
         font-size: 2rem;
         font-weight: 600;
-        text-transform: uppercase;
-        padding: 5.5rem 4.5rem;
-        opacity: 0.7;
-        transition: all 0.2s;
+        width: 8rem;
+        height: 8rem;
+        position: relative;
+        animation: pulsePlayButton 0.8s ease-in infinite alternate;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & svg {
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 3rem;
+        }
 
         &:hover {
-          background-color: #9fc427;
-          opacity: 1;
+          box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.25);
+          transform: scale(1.05);
         }
       }
     }

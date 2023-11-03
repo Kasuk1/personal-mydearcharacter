@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { PokeAPI } from '../../services/PokeAPI';
-import { RootState } from '../../app/store';
-import { CharacterState } from '../../interfaces';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { PokeAPI } from "../../services/PokeAPI";
+import { RootState } from "../../app/store";
+import { CharacterState } from "../../interfaces";
 
 export const getCharacterDetail = createAsyncThunk(
-  'character/getCharacterDetail',
+  "character/getCharacterDetail",
   (characterId: string) => PokeAPI.getCharacterDetail(characterId)
 );
 
@@ -15,9 +15,18 @@ const initialState: CharacterState = {
 };
 
 const characterSlice = createSlice({
-  name: 'character',
+  name: "character",
   initialState,
-  reducers: {},
+  reducers: {
+    cleanCharacterDetailData: (state) => {
+      return {
+        ...state,
+        character: null,
+        getCharacterDetailLoading: false,
+        getCharacterDetailError: false,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCharacterDetail.pending, (state) => {
@@ -35,6 +44,8 @@ const characterSlice = createSlice({
       });
   },
 });
+
+export const { cleanCharacterDetailData } = characterSlice.actions;
 
 export const selectCharacter = (state: RootState) => state.character.character;
 export const selectGetCharacterDetailLoading = (state: RootState) =>

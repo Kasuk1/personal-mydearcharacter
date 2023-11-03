@@ -1,6 +1,6 @@
-import { Characters, Pokemon, Result, GetCharacters } from '../interfaces';
+import { Characters, Pokemon, Result, GetCharacters } from "../interfaces";
 
-const URL: string = 'https://pokeapi.co/api/v2';
+const URL: string = "https://pokeapi.co/api/v2";
 
 export const PokeAPI = {
   async getCharacters(nextPrev: string): Promise<GetCharacters> {
@@ -12,7 +12,7 @@ export const PokeAPI = {
     const charactersWithDetail = await Promise.all(
       results.map(async (character: Result) => {
         const characterId = character.url.split(
-          'https://pokeapi.co/api/v2/pokemon/'
+          "https://pokeapi.co/api/v2/pokemon/"
         )[1];
         const { id, name, sprites, species } = await PokeAPI.getCharacterDetail(
           characterId
@@ -21,7 +21,7 @@ export const PokeAPI = {
         return {
           id,
           name,
-          image: sprites.other!['official-artwork'].front_default,
+          image: sprites.other!["official-artwork"].front_default,
           species,
         };
       })
@@ -34,12 +34,17 @@ export const PokeAPI = {
     };
   },
 
-  async getRandomCharacters(): Promise<Pokemon[]> {
+  async getRandomCharacters(quantity: 1): Promise<Pokemon[]> {
     const randomNumber1 = (Math.floor(Math.random() * 850) + 1).toString();
     const randomNumber2 = (Math.floor(Math.random() * 850) + 1).toString();
+
     const pokemon1 = await PokeAPI.getCharacterDetail(randomNumber1);
     const pokemon2 = await PokeAPI.getCharacterDetail(randomNumber2);
-    return [{ ...pokemon1 }, { ...pokemon2 }];
+
+    if (quantity > 1) {
+      return [{ ...pokemon1 }, { ...pokemon2 }];
+    }
+    return [{ ...pokemon1 }];
   },
 
   async getCharacterDetail(characterId: string): Promise<Pokemon> {

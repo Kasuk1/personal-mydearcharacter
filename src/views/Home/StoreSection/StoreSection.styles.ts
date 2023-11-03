@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StoreSectionStyles = styled.section`
-  background-color: ${(props) => props.theme.primaryColor};
+  //background-color: ${(props) => props.theme.primaryColor};
   padding: 7rem 3rem;
   transition: all 0.2s;
 
@@ -15,48 +15,53 @@ const StoreSectionStyles = styled.section`
 
   .store-section {
     &--left {
-      grid-column: 1 / 10;
+      grid-column: 1 / 13;
       grid-row: 1 / 2;
-
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
 
       @media only screen and (min-width: 37.5em) {
-        grid-column: 2 / 10;
+        grid-column: 2 / 12;
       }
 
       @media only screen and (min-width: 87.5em) {
         grid-column: 2 / 7;
+        text-align: start;
+        align-items: flex-start;
       }
     }
 
     &--right {
-      margin-top: 4.5rem;
+      margin-top: 1rem;
       grid-column: 1 / -1;
       grid-row: 2 / 3;
       position: relative;
+      display: flex;
+      justify-content: center;
 
       @media only screen and (min-width: 25em) {
-        margin-top: 20.5rem;
+        margin-top: 0;
       }
 
       @media only screen and (min-width: 37.5em) {
-        grid-column: 2 / 11;
+        grid-column: 2 / 12;
       }
 
       @media only screen and (min-width: 87.5em) {
-        margin-top: 0;
         grid-row: 1 / 2;
         grid-column: 8 / 12;
       }
 
       & > :first-child {
         position: relative;
-        z-index: 1;
+        transform: scale(0.85);
+        //animation: 4s ease-in infinite alternate pulse;
       }
 
-      & > :last-child {
+      /* & > :last-child {
         display: none;
         position: absolute;
         bottom: 8rem;
@@ -64,12 +69,13 @@ const StoreSectionStyles = styled.section`
         z-index: 0;
 
         @media only screen and (min-width: 25em) {
-          display: block;
         }
 
         @media only screen and (min-width: 37.5em) {
+          display: block;
         }
-      }
+        
+      } */
     }
   }
 `;

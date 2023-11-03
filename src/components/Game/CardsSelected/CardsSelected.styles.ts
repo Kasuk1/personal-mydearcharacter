@@ -1,54 +1,58 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const CardsSelectedStyles = styled.div`
   border-radius: 0.9rem;
   padding: 1.5rem 2rem 1rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  gap: 3.5rem;
   transition: all 0.2s;
 
+  @media only screen and (min-width: 57.5em) {
+    flex-direction: row;
+  }
+
   .card-selected {
-    width: 30rem;
+    width: 18rem;
     min-width: 15rem;
 
     &__vs {
-      font-size: 10rem;
-      animation: opacityLoadingFull 0.6s infinite alternate;
+      font-size: 6rem;
+      font-style: oblique;
     }
 
     &__header {
       position: relative;
-
       & img {
         width: 100%;
       }
     }
 
     &__level {
+      position: absolute;
+      top: 0;
+      right: 0;
       background-color: ${(props) => props.theme.cardPrimaryColor};
-      border-radius: 5rem;
       color: ${(props) => props.theme.cardSingleTextColor};
       font-size: 1.6rem;
       font-weight: 600;
-      padding: 0.1rem 2rem;
-      position: absolute;
-      bottom: -1.5rem;
-      right: 0;
+      clip-path: circle();
+      padding: 1rem;
     }
 
     &__info {
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      justify-content: center;
     }
 
     &__wrapper {
+      text-align: center;
+
       & span {
         color: ${(props) => props.theme.paragraphColor};
-        font-size: 1.7rem;
+        font-size: 1.2rem;
         font-weight: 800;
         text-transform: uppercase;
       }
@@ -58,7 +62,7 @@ const CardsSelectedStyles = styled.div`
         overflow: hidden;
         white-space: nowrap;
         color: ${(props) => props.theme.paragraphColor};
-        font-size: 2.7rem;
+        font-size: 2.4rem;
         text-transform: uppercase;
       }
     }
